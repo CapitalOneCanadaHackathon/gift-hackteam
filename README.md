@@ -1,4 +1,4 @@
-# GIFT THE CODE HACKATHON
+# gift the code hackathon
 
 ## October 21-23
 
