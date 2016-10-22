@@ -18,6 +18,7 @@
             console.log("clicked");
         };
 
+
         /* config object */
         $scope.uiConfig = {
             calendar:{
@@ -31,10 +32,7 @@
                 eventClick: $scope.alertOnEventClick,
                 eventDrop: $scope.alertOnDrop,
                 eventResize: $scope.alertOnResize
-            },
-            viewRender: function(view) {
-                EventService.getMonthlyEvents(date);
-            },
+            }
         };
 
         //on page load retirve events for given month   

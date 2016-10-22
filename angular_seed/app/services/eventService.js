@@ -11,7 +11,7 @@
         eventService.monthlyEvents = [];
 
         
-        //retrieve events for a given month from th database
+        //retrieve all events for the given month and all future months
         eventService.getMonthlyEvents = function(date) {
             ApiService.getMonthlyBookings(date)
                 .then(function(data){
