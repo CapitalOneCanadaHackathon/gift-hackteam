@@ -5,7 +5,7 @@
 <head>
 
     <!-- CSS (load bootstrap) -->
-    
+    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
 
     <!-- JS (load angular, ui-router, and our custom js file) -->
 
@@ -14,6 +14,13 @@
 <!-- apply our angular app to our site -->
 <body >
 
+<<<<<<< HEAD
+=======
+<!-- NAVIGATION -->
+<nav class="navbar navbar-inverse" role="navigation">
+</nav>
+
+>>>>>>> 428a71e724a5a95ea27d3b08d68a9a20a60e318d
 <!-- MAIN CONTENT -->
 <div class="container">
 
@@ -22,8 +29,12 @@
 
 </div>
 <!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/moment/moment.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
+<script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
 <!-- endbower -->
 
     <!-- injector:js -->
@@ -38,6 +49,8 @@
     <script src="app/view/users/users.module.js"></script>
     <script src="app/app.js"></script>
     <script src="app/core/core.config.js"></script>
+    <script src="app/services/apiService.js"></script>
+    <script src="app/services/eventService.js"></script>
     <script src="app/view/admin/admin.controller.js"></script>
     <script src="app/view/admin/admin.route.js"></script>
     <script src="app/view/createAccount/createAccount.controller.js"></script>
