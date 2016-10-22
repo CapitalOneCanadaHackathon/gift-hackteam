@@ -166,8 +166,8 @@
             vm.numVolunteers = 0;
             vm.totalUsers = 0;
 
-            for (var i = 0; i < vm.users.length; i++) {
-                var user = vm.users[i];
+            for (var i = 0; i < vm.editUsersList.length; i++) {
+                var user = vm.editUsersList[i];
                 if (user.isAdmin) {
                     vm.numAdmin++;
                 } else {
