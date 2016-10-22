@@ -1,0 +1,51 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html data-ng-app="seedApp">
+<head>
+
+    <!-- CSS (load bootstrap) -->
+    
+
+    <!-- JS (load angular, ui-router, and our custom js file) -->
+
+</head>
+
+<!-- apply our angular app to our site -->
+<body >
+
+<!-- NAVIGATION -->
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="#">AngularUI Router</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li><a ui-sref="home">Home</a></li>
+        <li><a ui-sref="about">About</a></li>
+    </ul>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+    <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+    <div ui-view></div>
+
+</div>
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<!-- endbower -->
+
+    <!-- injector:js -->
+    <script src="app/core/core.module.js"></script>
+    <script src="app/view/page1/page1.module.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/core/core.config.js"></script>
+    <script src="app/view/page1/page1.controller.js"></script>
+    <script src="app/view/page1/page1.route.js"></script>
+    <!-- endinjector -->
+    
+
+</body>
+</html>
