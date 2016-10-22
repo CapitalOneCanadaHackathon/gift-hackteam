@@ -5,6 +5,8 @@
         'faver.home',
         'faver.stats'
         'faver.createAccount',
-        'faver.users'
+        'faver.users',
+	'faver.profile',
+	'faver.userList'
     ]);
 })();
