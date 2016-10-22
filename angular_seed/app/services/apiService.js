@@ -22,7 +22,7 @@
         ];
 
         //retrieve all events
-        apiService.getMonthlyBookings = function(date){
+        apiService.getMonthlyBookings = function(){
             var q = $q.defer();
             q.resolve(apiService.monthlyEvents);
             return q.promise;
