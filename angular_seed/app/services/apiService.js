@@ -30,10 +30,10 @@
         }
 
         apiService.attendees = [
-            { firstName: "Erin", lastName: "Gallagher" },
-            { firstName: "Rebeccaa", lastName: "Song" },
-            { firstName: "Mark", lastName: "Water" },
-            { firstName: "Annelise", lastName: "Jade" }
+            { firstName: "Erin", lastName: "Gallagher", userID:"123ecg" },
+            { firstName: "Rebeccaa", lastName: "Song", userID:"122dewg" },
+            { firstName: "Mark", lastName: "Water", userID:"3ecweg" },
+            { firstName: "Annelise", lastName: "Jade", userID:"574ecg" }
         ];
 
         //returns the list of attendees for an event
@@ -45,6 +45,7 @@
         }
 
         //adds the current user to the attendee list for an event
+        //parameters: eventID, userID
         apiService.attendEvent = function (eventID) {
             var q = $q.defer();
             q.resolve();
@@ -53,6 +54,7 @@
         }
 
          //leaves the current event and remove user from attendee list
+         //parameters: eventID, userID
         apiService.leaveEvent = function (eventID) {
             var q = $q.defer();
             q.resolve();
@@ -62,6 +64,7 @@
 
         //updates the total number of people who visited the event
         //and who visited the event in logs
+        //parameters: eventID, userID
         apiService.visitedEvent = function (eventID) {
             //TODO: connect to server.js
             console.log("user visited page, updating db....");

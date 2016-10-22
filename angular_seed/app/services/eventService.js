@@ -21,6 +21,8 @@
             volunteersRequired:0
          };
          eventService.numberOfVolunteers = 0;
+         eventService.eventInfo.currentUserAttending = 0; //0 = false, 1 = true
+         eventService.userID = "3ecweg"; //TODO retirve from session or user service
 
         
         //retrieve all events
@@ -79,11 +81,27 @@
                        eventService.numberOfVolunteers ++;
                     }
                     eventService.eventInfo.volunteersRequired = eventService.eventInfo.numVolunNeeded - eventService.numberOfVolunteers;
+                    eventService.currentUserAttending = eventService.isUserAttending();//determine if current user is attending the event
                     console.log(eventService.eventInfo.volunteersRequired);
             },
                 function(err){
                     alert("error retrieving attendees");
                 });
+        }
+
+        //determine if the current user is attending the event
+        //false = not attending, ture = attending
+        eventService.isUserAttending = function(){
+             for(var i = 0; i<eventService.eventAttendees.length; i++){//add events to array one by one
+                    if(eventService.eventAttendees[i].userID ==  eventService.userID){
+                        console.log("attending the event");
+                        eventService.eventInfo.currentUserAttending = 1;
+                        return 1;
+                    }
+                }
+                console.log("NOT attending the event");
+                eventService.eventInfo.currentUserAttending = 0;
+                return 0;
         }
 
         //adds the current user to the attendee list for an event
