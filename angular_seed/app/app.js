@@ -2,6 +2,7 @@
     'user strict';
     angular.module('faver',[
         'faver.login',
-        'faver.home'
+        'faver.home',
+        'faver.stats'
     ]);
 })();
