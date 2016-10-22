@@ -7,7 +7,12 @@
         vm.test = "ADMINNNN";
         //this should be displayed
         
-        vm.keyCode = "AfL24Jfm$^&4";
+
+
+        vm.keyCode = { 
+            "date": new Date("2016-10-21"),
+            "key": "AfL24Jfm1GKLylme234Po63M"  
+        };
 
         vm.users = [
 
@@ -137,6 +142,25 @@
         vm.numVolunteers = 0;
         vm.totalUsers = 0;
 
+        vm.generateKey = function() {
+
+            var msPerDay = (24 * 60 * 60 * 100);
+
+            console.log("Old key generated at: " + vm.keyCode.date);
+            var currDate = new Date();
+            console.log("Current Date : " + currDate);
+            var dateDiff = currDate - vm.keyCode.date;
+            console.log("Milliseconds since last generated key: " + dateDiff);
+
+            var daysPassed = Math.floor(dateDiff / msPerDay);
+            console.log("Days since last generated key: " + daysPassed);
+
+            if (daysPassed > 7) {
+                vm.keyCode.date = currDate;
+                vm.keyCode.key = (Math.random() + 1).toString(36).substr(2, 24);
+            }
+        };
+
         vm.countUsers = function() {
 
             vm.numAdmin = 0;
@@ -155,6 +179,7 @@
 
         };
 
+        vm.generateKey();
         vm.countUsers();
 
     }
