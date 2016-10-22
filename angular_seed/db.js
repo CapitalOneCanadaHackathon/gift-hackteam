@@ -46,14 +46,3 @@ exports.drop = function(tables, done) {
     pool.query('DELETE * FROM ' + name, cb)
   }, done)
 }
-
-exports.getUserById = function(){
-  var pool = state.pool;
-  if (!pool) return done(new Error('Missing database connection.'));
-
-  pool.query('SELECT * FROM testvas', function(err, results){
-    console.log(results[0].NAME);
-    return results[0].NAME;
-    
-  });
-}

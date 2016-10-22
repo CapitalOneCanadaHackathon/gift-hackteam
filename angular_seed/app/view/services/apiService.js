@@ -2,12 +2,12 @@
     'use strict';
     angular.module('faver.core').service('ApiService', ApiService);
 
-    ApiService.$inject = [];
+    ApiService.$inject = ['$http'];
 
     function ApiService(){
 
         var apiService = {};
-
+        
         
 
         return apiService;

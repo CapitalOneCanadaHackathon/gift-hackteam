@@ -9,6 +9,7 @@ app.get('/', function(req, res) {
     res.sendfile('index.html');
 });
 
+
 app.get('/basictest', function(req, res) {
     
     db.connect(done);
@@ -22,5 +23,5 @@ app.get('/basictest', function(req, res) {
 });
 
 
-//app.listen(8080);
+app.listen(8080);
 console.log('Magic happens on 8080');
