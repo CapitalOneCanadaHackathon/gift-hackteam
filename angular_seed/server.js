@@ -11,22 +11,14 @@ app.get('/', function(req, res) {
 
 app.get('/basictest', function(req, res) {
     
-    function selectTest(){
-        pool.query('SELECT * FROM testvas', function(err, results){
-            console.log(results[0].NAME);
-            res.send("Name: " + name);
-        });
-    }
-    
     db.connect(done);
 
     function done(){
         var pool = db.get();
         pool.query('SELECT * FROM testvas', function(err, results){
-            res.send("Name: " + results[0].NAME);
+            res.status(200).json({"Name" : results[0].NAME });
         });
     }
-    
 });
 
 
