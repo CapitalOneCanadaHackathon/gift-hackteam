@@ -1,7 +1,7 @@
 (function (){
     'use strict';
 
-    var routerApp = angular.module('faver.login');
+    var routerApp = angular.module('faver.home');
     routerApp.config(function($stateProvider, $urlRouterProvider) {
     
     //$urlRouterProvider.otherwise('/home');
@@ -9,18 +9,18 @@
     $stateProvider
         
         // HOME STATES AND NESTED VIEWS ========================================
-        .state('login', {
-            url: '/login',
-            templateUrl: 'app/view/login/login.html',
-            controller: 'LoginController',
+        .state('home', {
+            url: '/home',
+            templateUrl: 'app/view/home/home.html',
+            controller: 'HomeController',
             controllerAs: 'vm'
         })
         /*
         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-        .state('login', {
+        .state('home', {
             // we'll get to this in a bit       
         });
-        */
+       */ 
 });
     
 })();

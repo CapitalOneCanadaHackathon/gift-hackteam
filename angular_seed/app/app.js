@@ -1,6 +1,7 @@
 (function (){
     'user strict';
     angular.module('faver',[
-        'faver.login'
+        'faver.login',
+        'faver.home'
     ]);
 })();
