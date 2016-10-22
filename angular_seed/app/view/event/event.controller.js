@@ -22,6 +22,10 @@
         //retirve attendees given an event ID
         EventService.getAttendees(3);
 
+        //updates the total number of people who visited the event
+        //and who visited the event in logs
+        EventService.visitedEvent(3);
+
         //have that user added to the attendee list
         //once successfully added, get new attendee list
         vm.events.attendEvent = function(){

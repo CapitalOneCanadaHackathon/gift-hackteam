@@ -55,6 +55,7 @@
             }
         }
 
+        //returns the list of attendees for an event
         eventService.getAttendees = function(eventID) {
             ApiService.getAttendees(eventID)
                 .then(function(data){
@@ -69,6 +70,7 @@
                 });
         }
 
+        //adds the current user to the attendee list for an event
         eventService.attendEvent = function(eventID) {
             var q = $q.defer();
             ApiService.attendEvent(eventID)
@@ -80,6 +82,12 @@
                     q.reject();
                 });
             return q.promise;
+        }
+
+        //updates the total number of people who visited the event
+        //and who visited the event in logs
+        eventService.visitedEvent = function(eventID) {
+            ApiService.visitedEvent(eventID);
         }
 
 
