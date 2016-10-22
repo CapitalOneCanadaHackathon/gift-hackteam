@@ -8,7 +8,6 @@
         'faver.users',
 	    'faver.profile',
         'faver.admin',
-        'faver.event',
-        'faver.userList'
+        'faver.event'
     ]);
 })();
