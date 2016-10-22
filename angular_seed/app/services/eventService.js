@@ -2,13 +2,14 @@
     'use strict';
     angular.module('faver.core').service('EventService', EventService);
 
-    EventService.$inject = ['ApiService'];
+    EventService.$inject = ['$q','ApiService'];
 
-    function EventService(ApiService){
+    function EventService($q,ApiService){
 
         var eventService = {};
 
         eventService.monthlyEvents = [];
+        eventService.eventAttendees = [];
 
         
         //retrieve all events
@@ -26,7 +27,7 @@
                     console.log(eventService.monthlyEvents);
                 },
                 function(err){
-                    alert("error with getAllGroups");
+                    alert("error retrieving events");
                 });
 	    }
 
@@ -52,6 +53,29 @@
             else {
                 return '#2EB671';
             }
+        }
+
+        eventService.getAttendees = function(eventID) {
+            ApiService.getAttendees(eventID)
+                .then(function(data){
+                    var numEvents = eventService.eventAttendees.length;
+                   eventService.eventAttendees.splice(0,numEvents);
+				    for(var i = 0; i<data.length; i++){//add events to array one by one
+                       eventService.eventAttendees.push(data[i]);
+                    }
+                },
+                function(err){
+                    alert("error retrieving attendees");
+                });
+        }
+
+        eventService.attendEvent = function(eventID) {
+            ApiService.attendEvent(eventID)
+                .then(function(data){
+                },
+                function(err){
+                    alert("error could not attend event");
+                });
         }
 
 

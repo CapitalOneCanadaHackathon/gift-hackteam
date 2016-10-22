@@ -26,8 +26,26 @@
             var q = $q.defer();
             q.resolve(apiService.monthlyEvents);
             return q.promise;
-
 		}
+
+        apiService.attendees = [
+            {firstName:"Erin", lastName:"Gallagher"},
+            {firstName:"Rebeccaa", lastName:"Song"},
+            {firstName:"Mark", lastName:"Water"},
+            {firstName:"Annelise", lastName:"Jade"}
+        ];
+
+        apiService.getAttendees = function(eventID){
+            var q = $q.defer();
+            q.resolve(apiService.attendees);
+            return q.promise;
+        }
+
+        apiService.attendEvent = function(eventID){
+            var q = $q.defer();
+            q.resolve();
+            return q.promise;
+        }
         
 
         return apiService;
