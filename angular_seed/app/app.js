@@ -6,7 +6,7 @@
         'faver.stats'
         'faver.createAccount',
         'faver.users',
-	'faver.profile',
-	'faver.userList'
+	    'faver.profile',
+	    'faver.userList'
     ]);
 })();
