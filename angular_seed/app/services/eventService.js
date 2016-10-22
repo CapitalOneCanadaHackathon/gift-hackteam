@@ -1,6 +1,6 @@
 (function (){
     'use strict';
-    angular.module('faver.home').service('EventService', EventService);
+    angular.module('faver.core').service('EventService', EventService);
 
     EventService.$inject = ['ApiService'];
 
