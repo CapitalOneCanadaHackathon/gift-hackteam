@@ -4,12 +4,14 @@
 
     function UsersController(){
         var vm = this;
-		vm.myVar = "smiley.jpg"
-        vm.firstName = 'First Name'; // First Name display
-        vm.lastName = 'Last Name'; // Last Name display
-        vm.email = 'Email'; // Email
-        vm.lastActive = 'Last Active Activity'; // last Activity
-        vm.hashTag = 'Tags'; // Tags 
+		vm.myVar = "http://www.gravatar.com/avatar/"
+
+        vm.firstName = 'Frank'; // First Name display
+        vm.lastName = 'Kang'; // Last Name display
+        vm.email = 'frank2258@hotmail.com'; // Email
+        vm.lastActive = 'activity'; // last Activity
+        vm.hashTag = '#tags'; // Tags 
+        vm.myStory = 'text'; 
 
 
     }
