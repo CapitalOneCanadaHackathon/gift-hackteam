@@ -5,7 +5,10 @@
 <head>
 
     <!-- CSS (load bootstrap) -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>    
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css.map"/>    
 
     <!-- JS (load angular, ui-router, and our custom js file) -->
 
@@ -22,12 +25,13 @@
 
 </div>
 <!-- bower:js -->
-<script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
 <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <!-- endbower -->
 
     <!-- injector:js -->
@@ -42,6 +46,7 @@
     <script src="app/view/users/users.module.js"></script>
     <script src="app/app.js"></script>
     <script src="app/core/core.config.js"></script>
+    <script src="app/services/apiService.js"></script>
     <script src="app/view/admin/admin.controller.js"></script>
     <script src="app/view/admin/admin.route.js"></script>
     <script src="app/view/createAccount/createAccount.controller.js"></script>
@@ -54,7 +59,6 @@
     <script src="app/view/login/login.route.js"></script>
     <script src="app/view/profile/profile.controller.js"></script>
     <script src="app/view/profile/profile.route.js"></script>
-    <script src="app/services/apiService.js"></script>
     <script src="app/view/stats/stats.controller.js"></script>
     <script src="app/view/stats/stats.route.js"></script>
     <script src="app/view/users/users.controller.js"></script>

@@ -15,24 +15,26 @@
         <div>Total Users: {{vm.totalUsers}}</div>
     </div>
     <div style="margin: 10px;">
+        <button ng-click="vm.saveUsers()">Save All</button>
         <button>Email All</button>
     </div>
+
     <div style="height: 300px; overflow: auto;">
-        <table style="margin: 0 auto;">
-            <thead>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th> 
-                <th>Admin?</th>
-            </thead>
-            <tbody>
-                <tr ng-repeat="user in vm.users">
-                    <td>{{user.firstname}}</td>
-                    <td>{{user.lastname}}</td>
-                    <td><a href="mailto:{{user.email}}">{{user.email}}</a></td> <!-- hyperlink for admin to email individuals -->
-                    <td><input type="checkbox" name="admin" ng-model="user.isAdmin" ng-change="vm.countUsers()" /></td>
-                </tr>
-            </tbody>
-        </table>
+        <div>
+            <div class="col-xs-3">First Name</div>
+            <div class="col-xs-3">Last Name</div>
+            <div class="col-xs-3">Email</div>
+            <div class="col-xs-2">Admin?</div>
+            <div class="col-xs-1">Delete</div>
+        </div>
+        <div ng-repeat="user in vm.editUsersList" >
+            <!--<div>-->
+            <div class="col-xs-3">{{user.firstname}}</div>
+            <div class="col-xs-3">{{user.lastname}}</div>
+            <div class="col-xs-3"><a href="mailto:{{user.email}}">{{user.email}}</a></div>
+            <div class="col-xs-2"><input type="checkbox" name="admin" ng-model="user.isAdmin" ng-change="vm.countUsers()" /></div>
+            <div class="col-xs-1"><a href="" ng-click="vm.removeUser(user)"><i class="fa fa-remove"></i></a></div>
+            <!--</div>-->
+        </div>
     </div>
 </div>

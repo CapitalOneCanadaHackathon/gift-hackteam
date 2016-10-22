@@ -5,12 +5,11 @@
     function AdminController(){
         var vm = this;
         vm.test = "ADMINNNN";
-        //this should be displayed
         
-
+        // copy original array of users into new array to detect changes made
 
         vm.keyCode = { 
-            "date": new Date("2016-10-21"),
+            "date": new Date("2016/10/22"),
             "key": "AfL24Jfm1GKLylme234Po63M"  
         };
 
@@ -144,7 +143,7 @@
 
         vm.generateKey = function() {
 
-            var msPerDay = (24 * 60 * 60 * 100);
+            var msPerDay = (24 * 60 * 60 * 1000);
 
             console.log("Old key generated at: " + vm.keyCode.date);
             var currDate = new Date();
@@ -152,10 +151,10 @@
             var dateDiff = currDate - vm.keyCode.date;
             console.log("Milliseconds since last generated key: " + dateDiff);
 
-            var daysPassed = Math.floor(dateDiff / msPerDay);
+            var daysPassed = Math.ceil(dateDiff / msPerDay);
             console.log("Days since last generated key: " + daysPassed);
 
-            if (daysPassed > 7) {
+            if (daysPassed > 1) {
                 vm.keyCode.date = currDate;
                 vm.keyCode.key = (Math.random() + 1).toString(36).substr(2, 24);
             }
@@ -178,6 +177,43 @@
             }
 
         };
+
+        vm.saveUsers = function() {
+
+            if (!vm.equals(vm.users, vm.editUsersList)) {
+                // send to db
+                console.log("Saved Edited Users");
+                angular.copy(vm.editUsersList, vm.users);
+            }
+        };
+
+        vm.equals = function(origUsers, editedUsers) {
+
+            var isEqual = true;
+
+            if (origUsers.length != editedUsers.length) {
+                isEqual = false;
+            } else {
+                for (var i = 0; i < origUsers.length; i++) {
+                    if (origUsers[i].isAdmin != editedUsers[i].isAdmin) {
+                        isEqual = false;
+                        break;
+                    }
+                }
+            }
+
+            return isEqual;
+        };
+
+        vm.removeUser = function(user) {
+
+            var index = vm.editUsersList.indexOf(user);
+            vm.editUsersList.splice(index, 1);
+
+        };
+
+        vm.editUsersList = [];
+        angular.copy(vm.users, vm.editUsersList);
 
         vm.generateKey();
         vm.countUsers();
