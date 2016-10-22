@@ -2,144 +2,52 @@
     'use strict';
     angular.module('faver.core').service('AdminService', AdminService);
 
-    AdminService.$inject = ['ApiService'];
+    AdminService.$inject = ['$q', 'ApiService'];
 
-    function AdminService(ApiService){
+    function AdminService($q, ApiService){
 
         var adminService = {};
 
-        adminService.keyCode = { 
-            "date": new Date("2016/10/22"),
-            "key": "AfL24Jfm1GKLylme234Po63M"  
+        adminService.keyCode = {};
+
+        // handle generating the key code
+        adminService.getKeyCode = function() {
+            var q = $q.defer();
+            ApiService.getKeyCode()
+                .then(function(data) {
+                    adminService.keyCode.key = data.key;
+                    adminService.keyCode.date = data.date;
+                    adminService.generateKey();
+                    q.resolve();
+                }, function(err) {
+                    alert("Error retrieving keycode");
+                    q.reject();
+                });
+                return q.promise;
         };
 
+        adminService.users = [];
         adminService.editUsersList = [];
-        adminService.users = [
-            {
-            "firstname": "Person",
-            "lastname": "One",
-            "email": "personone@email.com",
-            "isAdmin": false,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Two",
-            "email": "persontwo@email.com",
-            "isAdmin": true,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Three",
-            "email": "personthree@email.com",
-            "isAdmin": false,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Four",
-            "email": "personfour@email.com",
-            "isAdmin": true,
-            },
-                   {
-            "firstname": "Person",
-            "lastname": "Five",
-            "email": "personfive@email.com",
-            "isAdmin": false,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Six",
-            "email": "personsix@email.com",
-            "isAdmin": true,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Seven",
-            "email": "personseven@email.com",
-            "isAdmin": false,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Eight",
-            "email": "personeight@email.com",
-            "isAdmin": true,
-            },
-              {
-            "firstname": "Person",
-            "lastname": "One",
-            "email": "personone@email.com",
-            "isAdmin": false,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Two",
-            "email": "persontwo@email.com",
-            "isAdmin": true,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Three",
-            "email": "personthree@email.com",
-            "isAdmin": false,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Four",
-            "email": "personfour@email.com",
-            "isAdmin": true,
-            },
-                   {
-            "firstname": "Person",
-            "lastname": "Five",
-            "email": "personfive@email.com",
-            "isAdmin": false,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Six",
-            "email": "personsix@email.com",
-            "isAdmin": true,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Seven",
-            "email": "personseven@email.com",
-            "isAdmin": false,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Eight",
-            "email": "personeight@email.com",
-            "isAdmin": true,
-            },
-              {
-            "firstname": "Person",
-            "lastname": "One",
-            "email": "personone@email.com",
-            "isAdmin": false,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Two",
-            "email": "persontwo@email.com",
-            "isAdmin": true,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Three",
-            "email": "personthree@email.com",
-            "isAdmin": false,
-            },
-            {
-            "firstname": "Person",
-            "lastname": "Four",
-            "email": "personfour@email.com",
-            "isAdmin": true,
-            }
-        ];
-        adminService.numAdmin = 0;
-        adminService.numVolunteers = 0;
-        adminService.totalUsers = 0;
 
+        // get list of users
+        adminService.getCurrentUsers = function() {
+            var q = $q.defer();
+            ApiService.getUsers()
+                .then(function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                        adminService.users.push(data[i]);
+                        // adminService.editUsersList.push(data[i]);
+                    }
+                    q.resolve();
+                    angular.copy(adminService.users, adminService.editUsersList);
+                }, function(err) {
+                    alert("Error retrieving users");
+                    q.defer();
+                });
+           return q.promise;     
+        }
+
+        // helper function to generate a new key every day
         adminService.generateKey = function() {
             
             var msPerDay = (24 * 60 * 60 * 1000);
@@ -156,20 +64,37 @@
             if (daysPassed > 1) {
                 adminService.keyCode.date = currDate;
                 adminService.keyCode.key = (Math.random() + 1).toString(36).substr(2, 24);
+                ApiService.updateKey(adminService.keyCode).then(function(data) {
+                    console.log("Key updated");
+                }, function(err) {
+                    alert("Error updating key code");
+                });
             }
 
         };
 
-        adminService.saveUsers = function() {
+        // save users if changes have been made
+        adminService.saveUsers = function(users) {
+
+            adminService.editUsersList = [];
+            for (var i = 0; i < users.length; i++) {
+                adminService.editUsersList.push(users[i]);
+            }
 
             if (!adminService.equals(adminService.users, adminService.editUsersList)) {
                 // send to db
                 console.log("Saved Edited Users");
                 angular.copy(adminService.editUsersList, adminService.users);
+                ApiService.saveUsers(adminService.users).then(function() {
+                    console.log(adminService.users);    
+                }, function(err) {
+                    alert("Error saving users");
+                });
             }
-
         };
 
+        // helper function to determine if the original
+        // list of users is different from the saved list
         adminService.equals = function(origUsers, editedUsers) {
 
             var isEqual = true;
@@ -186,10 +111,6 @@
             }
 
             return isEqual;
-        };
-
-        adminService.setUsers = function() {
-            angular.copy(adminService.users, adminService.editUsersList);
         };
 
         return adminService;

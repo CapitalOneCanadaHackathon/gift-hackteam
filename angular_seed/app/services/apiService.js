@@ -2,12 +2,18 @@
     'use strict';
     angular.module('faver.core').service('ApiService', ApiService);
 
-    ApiService.$inject = [];
+    ApiService.$inject = ['$q'];
 
-    function ApiService(){
+    function ApiService($q){
 
         var apiService = {};
 
+        // ---- EVENTS ---- //
+
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
         apiService.monthlyEvents = [ 
             {title: 'All Day Event',start: new Date(y, m, 1), eventID:1, type:"volunteer-meeting",location:"123 address st.",description:"this is a great meeting"},
             {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2), eventID:2, type:"social",location:"123 address st.",description:"this is a great meeting"},
@@ -38,6 +44,48 @@
             */
 
 		}
+
+        // ---- ADMIN ---- //
+
+        // for the account creation code
+        apiService.keyCode = { 
+            "date": new Date("2016/10/22"),
+            "key": "AfL24Jfm1GKLylme234Po63M"  
+        };
+
+        apiService.getKeyCode = function() {
+
+            var q = $q.defer();
+            q.resolve(apiService.keyCode);
+            return q.promise;
+
+        };
+
+        // for retrieving the users
+        apiService.users = [
+            { "firstname": "Person", "lastname": "One", "email": "personone@email.com", "isAdmin": false },
+            { "firstname": "Person", "lastname": "Two", "email": "persontwo@email.com", "isAdmin": true },
+            { "firstname": "Person", "lastname": "Three", "email": "personthree@email.com", "isAdmin": false },
+            { "firstname": "Person", "lastname": "Four", "email": "personfour@email.com", "isAdmin": true },
+            { "firstname": "Person", "lastname": "Five", "email": "personfive@email.com", "isAdmin": false },
+            { "firstname": "Person", "lastname": "Six","email": "personsix@email.com", "isAdmin": true }
+        ];
+
+        apiService.getUsers = function() {
+            var q = $q.defer();
+            q.resolve(apiService.users);
+            return q.promise;
+        };
+
+        // for saving users
+        apiService.saveUsers = function(users) {
+
+            // db insert
+            var q = $q.defer();
+            q.resolve();
+            return q.promise;
+
+        };
 
         return apiService;
     }
