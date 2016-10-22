@@ -36,7 +36,7 @@
         };
 
         //on page load retirve events for given month   
-        EventService.getMonthlyEvents(date);
+        EventService.getMonthlyEvents();
 
     }
 })();

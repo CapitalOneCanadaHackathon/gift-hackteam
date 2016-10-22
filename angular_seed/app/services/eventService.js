@@ -11,9 +11,9 @@
         eventService.monthlyEvents = [];
 
         
-        //retrieve all events for the given month and all future months
-        eventService.getMonthlyEvents = function(date) {
-            ApiService.getMonthlyBookings(date)
+        //retrieve all events
+        eventService.getMonthlyEvents = function() {
+            ApiService.getMonthlyBookings()
                 .then(function(data){
                     //must remove old bookings before trying to add new ones
                     var numEvents = eventService.monthlyEvents.length;

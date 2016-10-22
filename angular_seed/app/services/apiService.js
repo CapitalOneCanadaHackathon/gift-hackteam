@@ -21,7 +21,7 @@
             {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29)}
         ];
 
-        //retrieve the events for the given month and all future months
+        //retrieve all events
         apiService.getMonthlyBookings = function(date){
             var q = $q.defer();
             q.resolve(apiService.monthlyEvents);
