@@ -1,6 +1,6 @@
 (function (){
     'user strict';
-    angular.module('seedApp',[
-        'seedApp.page1'
+    angular.module('faver',[
+        'faver.login'
     ]);
 })();

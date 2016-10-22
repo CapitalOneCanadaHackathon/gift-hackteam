@@ -1,6 +1,6 @@
 (function(){
     'use strict';
-    angular.module('seedApp.core', [
+    angular.module('faver.core', [
         'ui.router'
     ]);
 })();

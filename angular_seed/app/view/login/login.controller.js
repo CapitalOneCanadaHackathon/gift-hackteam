@@ -1,8 +1,8 @@
 (function (){
     'use strict';
-    angular.module('seedApp.page1').controller('Page1Controller', Page1Controller);
+    angular.module('faver.login').controller('LoginController', LoginController);
 
-    function Page1Controller(){
+    function LoginController(){
         var vm = this;
         vm.test = "TTTTEST";
         //this should be displayed

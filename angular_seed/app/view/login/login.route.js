@@ -1,7 +1,7 @@
 (function (){
     'use strict';
 
-    var routerApp = angular.module('seedApp.page1');
+    var routerApp = angular.module('faver.login');
     routerApp.config(function($stateProvider, $urlRouterProvider) {
     
     //$urlRouterProvider.otherwise('/home');
@@ -11,8 +11,8 @@
         // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/home',
-            templateUrl: 'app/view/page1/page1.html',
-            controller: 'Page1Controller',
+            templateUrl: 'app/view/login/login.html',
+            controller: 'LoginController',
             controllerAs: 'vm'
         })
         

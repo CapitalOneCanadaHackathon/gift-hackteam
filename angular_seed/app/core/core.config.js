@@ -1,6 +1,6 @@
 (function (){
     'use strict';
-    var core = angular.module('seedApp.core');
+    var core = angular.module('faver.core');
 
     core.config(configure);
     
