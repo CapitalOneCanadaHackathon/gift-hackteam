@@ -38,8 +38,8 @@
                 height: 450,
                 editable: true,
                 header:{
-                left: '',
-                center: 'title',
+                left: 'title',
+                center: '',
                 right: 'today prev,next'
                 },
                 eventClick: $scope.alertOnEventClick,
