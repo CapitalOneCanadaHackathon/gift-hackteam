@@ -27,6 +27,20 @@
             q.resolve(apiService.monthlyEvents);
             return q.promise;
 
+            /*
+            var promisePost = $http.post('/test', {})
+                .success(function(data, status) {
+
+                })
+                .error(function(data, status) {
+
+    
+                });
+
+		    return promisePost;
+
+            */
+
 		}
         
 
