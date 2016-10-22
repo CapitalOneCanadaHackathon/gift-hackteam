@@ -1,4 +1,6 @@
-<div>
-    <h1>Create Account Page</h1>
-    <p>{{vm.test}}</p>
-</div>
+  <!-- Form to get code -->
+<h1>Create Account</h1>
+   <form ng-submit="vm.submit()">
+      <label>Code:</label><input type="text" ng-model="vm.code" required/></br>
+      <button type="submit">Create</button>
+  </form>

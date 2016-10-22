@@ -1,11 +1,15 @@
 (function (){
     'use strict';
     angular.module('faver.createAccount').controller('CreateAccountController', CreateAccountController);
+	
+	CreateAccountController.$inject = [];
 
     function CreateAccountController(){
         var vm = this;
-        vm.test = "TTTTEST";
-        //this should be displayed
+		
+		vm.submit = function () {
+			console.log(vm.code);
+		}
         
         
     }

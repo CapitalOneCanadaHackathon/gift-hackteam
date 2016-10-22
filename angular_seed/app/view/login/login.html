@@ -1,4 +1,7 @@
-<div>
-    <h1>Login Page</h1>
-    <p>{{vm.test}}</p>
-</div>
+  <!-- Form to get username & password -->
+  <h1>Login</h1>
+   <form ng-click="vm.submit()">
+      <label>Username:</label><input type="text" ng-model="vm.username" required/></br></br>
+      <label>Password:</label><input type="password" ng-model="vm.password" required></br>
+      <button type="submit">Login</button>
+  </form>

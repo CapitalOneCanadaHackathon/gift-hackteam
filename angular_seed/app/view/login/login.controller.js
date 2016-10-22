@@ -2,11 +2,17 @@
     'use strict';
     angular.module('faver.login').controller('LoginController', LoginController);
 
+	LoginController.$inject = [];
+	
     function LoginController(){
         var vm = this;
-        vm.test = "TTTTEST";
-        //this should be displayed
-        
-        
+		
+		
+		vm.submit = function () {
+			console.log(vm.username);
+			console.log(vm.password);
+		}
+   
     }
+	
 })();
