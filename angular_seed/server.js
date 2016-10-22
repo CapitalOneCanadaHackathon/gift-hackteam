@@ -25,12 +25,17 @@ app.get('/basictest', function(req, res) {
 app.post('/test', function(req, res){
 
     db.connect(done);
-//{title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29), eventID:6, type:"board-meeting",location:"123 address st.",description:"this is a great meeting"}
+
     function done(){
         var pool = db.get();
         var events = [];
         pool.query('SELECT * FROM eventslog', function(err, results){
-            events.push({"title": });
+            var arraylength = results.length;
+            for(var i = 0; i < arraylength; i++){
+                events.push({"title":results[i].eventTitle, "start":results[i].eventStart, "end":results[i].eventEnd, "eventId":results[i].eventId, "type":results[i].eventType, "location":results[i].eventAddress, "description":results[i].eventDescription});
+            }
+            res.status(200).json(events);
+      
         });
     }
 });

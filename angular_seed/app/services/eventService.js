@@ -17,11 +17,12 @@
                 .then(function(data){
                     //must remove old bookings before trying to add new ones
                     var numEvents = eventService.monthlyEvents.length;
+                    var newData = data.data;
 		            eventService.monthlyEvents.splice(0,numEvents);
-				    for(var i = 0; i<data.length; i++){//add events to array one by one
-                        var colour = eventService.pickEventColour(data[i].type);
-                        data[i].color = colour;
-                        eventService.monthlyEvents.push(data[i]);
+				    for(var i = 0; i<newData.length; i++){//add events to array one by one
+                        var colour = eventService.pickEventColour(newData[i].type);
+                        newData[i].color = colour;
+                        eventService.monthlyEvents.push(newData[i]);
                     }
                     console.log(eventService.monthlyEvents);
                 },

@@ -2,9 +2,9 @@
     'use strict';
     angular.module('faver.core').service('ApiService', ApiService);
 
-    ApiService.$inject = ['$q'];
+    ApiService.$inject = ['$q','$http'];
 
-    function ApiService($q){
+    function ApiService($q, $http){
 
         var apiService = {};
         var date = new Date();
@@ -23,23 +23,21 @@
 
         //retrieve all events
         apiService.getMonthlyBookings = function(){
-            var q = $q.defer();
-            q.resolve(apiService.monthlyEvents);
-            return q.promise;
+            // var q = $q.defer();
+            // q.resolve(apiService.monthlyEvents); 
+            // return q.promise;
 
-            /*
+            
             var promisePost = $http.post('/test', {})
                 .success(function(data, status) {
-
+                    console.log(data);
+                    apiService.monthlyEvents = data;
                 })
                 .error(function(data, status) {
-
-    
+                    console.log("Error has occured!");
                 });
 
 		    return promisePost;
-
-            */
 
 		}
         
