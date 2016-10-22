@@ -70,12 +70,16 @@
         }
 
         eventService.attendEvent = function(eventID) {
+            var q = $q.defer();
             ApiService.attendEvent(eventID)
                 .then(function(data){
+                    q.resolve();
                 },
                 function(err){
                     alert("error could not attend event");
+                    q.reject();
                 });
+            return q.promise;
         }
 
 

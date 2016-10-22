@@ -21,6 +21,17 @@
         
         //retirve attendees given an event ID
         EventService.getAttendees(3);
+
+        //have that user added to the attendee list
+        //once successfully added, get new attendee list
+        vm.events.attendEvent = function(){
+            EventService.attendEvent(3)
+                .then(function(){
+                     EventService.getAttendees(3);
+                },
+                function(err){
+                });
+        }
         
     }
 })();
