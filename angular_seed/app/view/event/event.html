@@ -1,4 +1,44 @@
-<div>
-    <h1>Event Page</h1>
-    <p>{{vm.test}}</p>
+<div class="row"><div class="col-xs-12" style="height:40px"></div></div>
+<div class="row vert-align">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-4 horz-center"> 
+        <img class="img-circle" src="app\img\pexels-photo.jpg" alt="Event Photo" height="300px" width="300px">
+    </div>
+    <div class="col-xs-6 horz-center">
+        <div class="row">
+            <h3 class="col-xs-4"><label>Event Name:</label></h3>
+            <h3 class="col-xs-8">{{vm.events.eventName}}</h3>
+        </div> 
+        <div class="row">
+            <div class="col-xs-4"><label>Event Organizer:</label></div>
+            <div class="col-xs-8">{{vm.events.firstName}} {{vm.events.lastName}}</div>
+        </div> 
+        <div class="row">
+            <div class="col-xs-4"><label>Date:</label></div>
+            <div class="col-xs-8">{{vm.events.date}}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4"><label>Time:</label></div>
+            <div class="col-xs-8">{{vm.events.start}} - {{vm.events.end}}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4"><label>Location:</label></div>
+            <div class="col-xs-8">{{vm.events.location}}</div>
+        </div>   
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-4" style="text-align:center; margin-top:20px;"> 
+        <h3>Attendees</h3>
+        <table>
+            <tr ng-repeat="x in vm.events.attendees">
+            <td style="width:45px;"><img class="img-circle" src="app\img\icon-user.png" height="25px" width="25px"></td>
+            <td>{{x.firstName}} {{x.lastName}}</td>
+  </tr>
+        </table>
+    </div>
+    <div class="col-xs-6"> 
+        <textarea class="form-control" rows="10" disabled>{{vm.events.description}}</textarea>
+    </div>
 </div>

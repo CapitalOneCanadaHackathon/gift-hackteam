@@ -1,0 +1,26 @@
+label {
+  display: inline-block;
+}​
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.vert-align {
+    display: flex;
+    align-items: center;
+}
+
+.no-padding {
+    padding-right:0px;
+    padding-left:0px;
+}
+
+.horz-center {
+        margin: auto;
+}
+
+table {
+    text-align:center;
+    width:100%
+}
