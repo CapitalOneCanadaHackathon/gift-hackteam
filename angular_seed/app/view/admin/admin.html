@@ -1,4 +1,4 @@
-<div style="text-align: center;">
+<div style="text-align: center; width: 80%;">
     <h1>Administrative Page</h1>
 
     <!-- Account Key Code -->
@@ -19,7 +19,27 @@
         <button>Email All</button>
     </div>
 
-    <div style="height: 300px; overflow: auto;">
+    <table class="table table-striped table-bordered table-condensed">
+        <thead>
+            <th style="text-align: center;">First Name</th>
+            <th style="text-align: center;">Last Name</th>
+            <th style="text-align: center;">Email</th>
+            <th style="text-align: center;">Admin?</th>
+            <th style="text-align: center;">Delete</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in vm.editUsersList">
+                <td>{{user.firstname}}</td>
+                <td>{{user.lastname}}</td>
+                <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
+                <td style="text-align: center;"><input type="checkbox" name="admin" ng-model="user.isAdmin" ng-change="vm.countUsers()" /></td>
+                <td style="text-align: center;"><a href="" ng-click="vm.removeUser(user)"><i class="fa fa-remove"></i></a></td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <!--<div style="height: 300px; overflow: auto;">
         <div>
             <div class="col-xs-3">First Name</div>
             <div class="col-xs-3">Last Name</div>
@@ -29,12 +49,12 @@
         </div>
         <div ng-repeat="user in vm.editUsersList" >
             <!--<div>-->
-            <div class="col-xs-3">{{user.firstname}}</div>
+            <!--<div class="col-xs-3">{{user.firstname}}</div>
             <div class="col-xs-3">{{user.lastname}}</div>
             <div class="col-xs-3"><a href="mailto:{{user.email}}">{{user.email}}</a></div>
             <div class="col-xs-2"><input type="checkbox" name="admin" ng-model="user.isAdmin" ng-change="vm.countUsers()" /></div>
-            <div class="col-xs-1"><a href="" ng-click="vm.removeUser(user)"><i class="fa fa-remove"></i></a></div>
+            <div class="col-xs-1"><a href="" ng-click="vm.removeUser(user)"><i class="fa fa-remove"></i></a></div>-->
             <!--</div>-->
-        </div>
-    </div>
+        <!--</div>-->
+    <!--</div>-->
 </div>
