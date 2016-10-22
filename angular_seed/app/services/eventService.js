@@ -2,23 +2,30 @@
     'use strict';
     angular.module('faver.home').service('EventService', EventService);
 
-    EventService.$inject = [];
+    EventService.$inject = ['ApiService'];
 
-    function EventService(){
+    function EventService(ApiService){
 
         var eventService = {};
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
 
-        eventService.monthlyEvents = [ {title: 'All Day Event',start: new Date(y, m, 1)},
-            {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-            {title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-            {title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-            {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-            {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29)}];
+        eventService.monthlyEvents = [];
 
+        
+        //retrieve events for a given month from th database
+        eventService.getMonthlyEvents = function(date) {
+            ApiService.getMonthlyBookings(date)
+                .then(function(data){
+                    //must remove old bookings before trying to add new ones
+                    var numEvents = eventService.monthlyEvents.length;
+		            eventService.monthlyEvents.splice(0,numEvents);
+				    for(var i = 0; i<data.length; i++){//add events to array one by one
+                        eventService.monthlyEvents.push(data[i]);
+                    }
+                },
+                function(err){
+                    alert("error with getAllGroups");
+                });
+	    }
         return eventService;
     }
 })();

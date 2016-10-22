@@ -6,6 +6,10 @@
 
     function HomeController($scope,uiCalendarConfig,EventService){
         var vm = this;
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
         $scope.events = EventService.monthlyEvents;
 
         $scope.eventSources = [$scope.events];
@@ -27,8 +31,14 @@
                 eventClick: $scope.alertOnEventClick,
                 eventDrop: $scope.alertOnDrop,
                 eventResize: $scope.alertOnResize
-            }
+            },
+            viewRender: function(view) {
+                EventService.getMonthlyEvents(date);
+            },
         };
+
+        //on page load retirve events for given month   
+        EventService.getMonthlyEvents(date);
 
     }
 })();
