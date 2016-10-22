@@ -1,4 +1,40 @@
-<div>
-    <h1>Admin Page</h1>
-    <p>{{vm.test}}</p>
+<div style="text-align: center;">
+    <h1>Administrative Page</h1>
+
+    <!-- Account Key Code -->
+    <h2>Account Key</h2>
+    <div>
+        {{vm.keyCode.key}}
+    </div>
+
+    <!-- User List for Admin -->
+    <h2>Users</h2>
+    <div style="margin: 10px;">
+        <div>No. of Administrators: {{vm.numAdmin}}</div>
+        <div>No. of Volunteers: {{vm.numVolunteers}}</div>
+        <div>Total Users: {{vm.totalUsers}}</div>
+    </div>
+    <div style="margin: 10px;">
+        <button ng-click="vm.saveUsers()">Save All</button>
+        <button>Email All</button>
+    </div>
+
+    <div style="height: 300px; overflow: auto;">
+        <div>
+            <div class="col-xs-3">First Name</div>
+            <div class="col-xs-3">Last Name</div>
+            <div class="col-xs-3">Email</div>
+            <div class="col-xs-2">Admin?</div>
+            <div class="col-xs-1">Delete</div>
+        </div>
+        <div ng-repeat="user in vm.editUsersList" >
+            <!--<div>-->
+            <div class="col-xs-3">{{user.firstname}}</div>
+            <div class="col-xs-3">{{user.lastname}}</div>
+            <div class="col-xs-3"><a href="mailto:{{user.email}}">{{user.email}}</a></div>
+            <div class="col-xs-2"><input type="checkbox" name="admin" ng-model="user.isAdmin" ng-change="vm.countUsers()" /></div>
+            <div class="col-xs-1"><a href="" ng-click="vm.removeUser(user)"><i class="fa fa-remove"></i></a></div>
+            <!--</div>-->
+        </div>
+    </div>
 </div>
