@@ -10,6 +10,17 @@
 
         eventService.monthlyEvents = [];
         eventService.eventAttendees = [];
+        eventService.eventInfo = {
+            eventName:"Volunteer Meeting",
+            firstName:"Erin",
+            lastName:"Gallagher",
+            date:"October 24th, 2016",
+            start:"6pm",
+            end:"8pm",
+            location:"123 adress st.",
+            volunteersRequired:0
+         };
+         eventService.numberOfVolunteers = 0;
 
         
         //retrieve all events
@@ -61,10 +72,15 @@
                 .then(function(data){
                     var numEvents = eventService.eventAttendees.length;
                    eventService.eventAttendees.splice(0,numEvents);
+                    eventService.eventInfo.volunteersRequired = 0;
+                     eventService.numberOfVolunteers = 0;
 				    for(var i = 0; i<data.length; i++){//add events to array one by one
                        eventService.eventAttendees.push(data[i]);
+                       eventService.numberOfVolunteers ++;
                     }
-                },
+                    eventService.eventInfo.volunteersRequired = eventService.eventInfo.numVolunNeeded - eventService.numberOfVolunteers;
+                    console.log(eventService.eventInfo.volunteersRequired);
+            },
                 function(err){
                     alert("error retrieving attendees");
                 });

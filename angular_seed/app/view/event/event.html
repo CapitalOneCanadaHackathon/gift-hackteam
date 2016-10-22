@@ -1,4 +1,7 @@
 <div class="row"><div class="col-xs-12" style="height:40px"></div></div>
+<div class="row" ng-if="vm.events.eventInfo.volunteersRequired > 0">
+    <div class="col-xs-12 alert alert-danger"><strong>Important!</strong>  We need {{vm.events.eventInfo.volunteersRequired}} more volunteers</div>
+</div>
 <div class="row vert-align">
     <div class="col-xs-1"></div>
     <div class="col-xs-4 horz-center"> 
@@ -7,23 +10,27 @@
     <div class="col-xs-6 horz-center">
         <div class="row">
             <h3 class="col-xs-4"><label>Event Name:</label></h3>
-            <h3 class="col-xs-8">{{vm.events.eventName}}</h3>
+            <h3 class="col-xs-8">{{vm.events.eventInfo.title}}</h3>
         </div> 
         <div class="row">
             <div class="col-xs-4"><label>Event Organizer:</label></div>
-            <div class="col-xs-8">{{vm.events.firstName}} {{vm.events.lastName}}</div>
+            <div class="col-xs-8">{{vm.events.eventInfo.firstName}} {{vm.events.eventInfo.lastName}}</div>
         </div> 
         <div class="row">
             <div class="col-xs-4"><label>Date:</label></div>
-            <div class="col-xs-8">{{vm.events.date}}</div>
+            <div class="col-xs-8">{{vm.events.eventInfo.start | date :  "fullDate"}}</div>
         </div>
         <div class="row">
             <div class="col-xs-4"><label>Time:</label></div>
-            <div class="col-xs-8">{{vm.events.start}} - {{vm.events.end}}</div>
+            <div class="col-xs-8">{{vm.events.eventInfo.start | date :  "shortTime"}} - {{vm.events.eventInfo.end | date :  "shortTime"}}</div>
         </div>
         <div class="row">
             <div class="col-xs-4"><label>Location:</label></div>
-            <div class="col-xs-8">{{vm.events.location}}</div>
+            <div class="col-xs-8">{{vm.events.eventInfo.location}}</div>
+        </div>
+         <div class="row">
+            <div class="col-xs-4"><label>Volunteers Needed:</label></div>
+            <div class="col-xs-8">{{vm.events.eventInfo.numVolunNeeded}}</div>
         </div>   
     </div>
 </div>

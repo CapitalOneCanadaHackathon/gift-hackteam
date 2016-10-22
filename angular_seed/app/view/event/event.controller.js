@@ -7,13 +7,8 @@
     function EventController(EventService){
         var vm = this;
         vm.events = {};
-        vm.events.eventName = "Volunteer Meeting";
-        vm.events.firstName = "Erin";
-        vm.events.lastName = "Gallagher";
-        vm.events.date = "October 24th, 2016";
-        vm.events.start = "6pm";
-        vm.events.end = "8pm";
-        vm.events.location = "123 adress st.";
+        vm.events.eventInfo = EventService.eventInfo;
+        vm.events.eventInfo.volunteersRequired = EventService.volunteersRequired
 
         vm.events.attendees = EventService.eventAttendees;
 
