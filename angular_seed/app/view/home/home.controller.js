@@ -2,9 +2,9 @@
     'use strict';
     angular.module('faver.home').controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope','uiCalendarConfig','EventService'];
+    HomeController.$inject = ['$scope','$state','uiCalendarConfig','EventService'];
 
-    function HomeController($scope,uiCalendarConfig,EventService){
+    function HomeController($scope,$state,uiCalendarConfig,EventService){
         var vm = this;
         var date = new Date();
         var d = date.getDate();
@@ -14,8 +14,21 @@
 
         $scope.eventSources = [$scope.events];
 
-        $scope.alertOnEventClick = function( date, jsEvent, view){
-            console.log("clicked");
+        //go to events page and display this events' info
+        $scope.alertOnEventClick = function(eventObj, jsEvent, view){
+            EventService.eventInfo = {
+                title:eventObj.title,
+                start: new Date(eventObj.start),
+                end: new Date(eventObj.end),
+                eventID: eventObj.eventID,
+                type: eventObj.type,
+                location: eventObj.location, 
+                description: eventObj.description,
+                createdBy: eventObj.createdBy,
+                numVolunNeeded: eventObj.numVolunNeeded,
+                allDay:eventObj.allDay
+            };
+            $state.go("event");
         };
 
 
@@ -25,8 +38,8 @@
                 height: 450,
                 editable: true,
                 header:{
-                left: 'title',
-                center: '',
+                left: '',
+                center: 'title',
                 right: 'today prev,next'
                 },
                 eventClick: $scope.alertOnEventClick,
