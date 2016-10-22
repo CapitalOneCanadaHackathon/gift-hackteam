@@ -24,3 +24,15 @@ table {
     text-align:center;
     width:100%
 }
+
+.inline {
+    display:inline;
+}
+
+.rounded-border {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    padding: 10px;
+    color: rgba(128, 128, 128, 0.92);
+}
