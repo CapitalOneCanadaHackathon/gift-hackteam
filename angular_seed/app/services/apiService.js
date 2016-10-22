@@ -11,6 +11,7 @@
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
+        var userID = "123ecg";
 
         apiService.monthlyEvents = [
             { title: 'All Day Event', start: new Date(y, m, 1), eventID: 1, type: "volunteer-meeting", location: "123 address st.", description: "this is a great meeting", createdBy:"12", numVolunNeeded:5},
@@ -45,6 +46,14 @@
 
         //adds the current user to the attendee list for an event
         apiService.attendEvent = function (eventID) {
+            var q = $q.defer();
+            q.resolve();
+            return q.promise;
+            //TODO: connect to server.js
+        }
+
+         //leaves the current event and remove user from attendee list
+        apiService.leaveEvent = function (eventID) {
             var q = $q.defer();
             q.resolve();
             return q.promise;

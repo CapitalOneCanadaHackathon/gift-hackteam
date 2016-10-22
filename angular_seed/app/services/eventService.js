@@ -67,8 +67,8 @@
         }
 
         //returns the list of attendees for an event
-        eventService.getAttendees = function(eventID) {
-            ApiService.getAttendees(eventID)
+        eventService.getAttendees = function() {
+            ApiService.getAttendees(eventService.eventInfo.eventID)
                 .then(function(data){
                     var numEvents = eventService.eventAttendees.length;
                    eventService.eventAttendees.splice(0,numEvents);
@@ -87,10 +87,10 @@
         }
 
         //adds the current user to the attendee list for an event
-        eventService.attendEvent = function(eventID) {
+        eventService.attendEvent = function() {
             var q = $q.defer();
-            ApiService.attendEvent(eventID)
-                .then(function(data){
+            ApiService.attendEvent(eventService.eventInfo.eventID)
+                .then(function(){
                     q.resolve();
                 },
                 function(err){
@@ -100,10 +100,26 @@
             return q.promise;
         }
 
+        //leaves the current event and remove user from attendee list
+        eventService.leaveEvent = function() {
+            var q = $q.defer();
+            ApiService.leaveEvent(eventService.eventInfo.eventID)
+                .then(function(){
+                    q.resolve();
+                },
+                function(err){
+                    alert("error could not attend event");
+                    q.reject();
+                });
+            return q.promise;
+        }
+
+        
+
         //updates the total number of people who visited the event
         //and who visited the event in logs
-        eventService.visitedEvent = function(eventID) {
-            ApiService.visitedEvent(eventID);
+        eventService.visitedEvent = function() {
+            ApiService.visitedEvent(eventService.eventInfo.eventID);
         }
 
 
