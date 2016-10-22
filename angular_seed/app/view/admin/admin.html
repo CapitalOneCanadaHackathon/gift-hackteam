@@ -1,4 +1,13 @@
 <div>
-    <h1>Admin Page</h1>
-    <p>{{vm.test}}</p>
+    <h1>Administrative Page</h1>
+
+    <div>
+        <div ng-repeat="user in vm.users">
+            <div>{{user.firstname}}</div>
+            <div>{{user.lastname}}</div>
+            <div>{{user.email}}</div>
+            <div>{{user.isAdmin}}</div>
+        </div>
+
+    </div>
 </div>
