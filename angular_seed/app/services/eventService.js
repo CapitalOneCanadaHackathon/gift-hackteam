@@ -33,7 +33,7 @@
                     var numEvents = eventService.monthlyEvents.length;
 		            eventService.monthlyEvents.splice(0,numEvents);
 				    for(var i = 0; i<data.length; i++){//add events to array one by one
-                        var colour = eventService.pickEventColour(data[i].type);
+                        var colour = eventService.pickEventColour(data[i].numAttendees, data[i].numVolunNeeded);
                         data[i].color = colour;
                         eventService.monthlyEvents.push(data[i]);
                     }
@@ -44,27 +44,12 @@
                 });
 	    }
 
-        eventService.pickEventColour = function(type) {
-            if(type == "volunteer-meeting"){
-                return '#6371C6';
-            }
-            else if (type == "social"){
-                return '#37a3fb';
-            }
-            else if (type == "lunch"){
-                return '#2ca09e';
-            }
-            else if (type == "board-meeting"){
-                return '#990D6F';
-            }
-            else if (type == "family-meeting"){
-                return '#5931b4';
-            }
-            else if (type == "board-meeting"){
-                return '#5931b4';
+        eventService.pickEventColour = function(numAttendies, numVolunNeeded) {
+            if(numVolunNeeded > numAttendies){
+                return '#990D6F'; //puple, need more volunteers
             }
             else {
-                return '#2EB671';
+                return '#6371C6';
             }
         }
 
