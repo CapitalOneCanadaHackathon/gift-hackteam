@@ -1,6 +1,8 @@
 (function(){
     'use strict';
     angular.module('faver.core', [
-        'ui.router'
+        'ui.router',
+        'ui.calendar'
+
     ]);
 })();

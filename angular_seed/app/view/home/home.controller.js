@@ -7,6 +7,6 @@
         vm.test = "TTTTEST";
         //this should be displayed
         
-        
+        vm.eventSources = [];
     }
 })();
