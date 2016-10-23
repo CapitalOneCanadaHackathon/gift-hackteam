@@ -84,9 +84,10 @@ app.post('/api/attendEvent', function(req, res){
         var pool = db.get();
         var events = [];
         pool.query('INSERT INTO eventattendance(eventId, userId, willAttend) VALUES (?,?,1)',[eventId, userId], function(err, results){         
-            res.status(200); 
+            res.status(200).json(events); 
         });
     }
+    //TODO:not udating the numAtendees number in eventslogs
 });
 
 
@@ -104,6 +105,7 @@ app.post('/api/leaveEvent', function(req, res){
             res.status(200).json(events); 
         });
     }
+    //TODO:not udating the numAtendees number in eventslogs
 });
 
 app.post('/api/visitedEventPage', function(req, res){
