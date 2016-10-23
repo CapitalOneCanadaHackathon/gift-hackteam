@@ -244,20 +244,38 @@ app.post('/api/saveUsers', function(req, res){
     var users = req.body.users;
     var diff = req.body.diff;
     
-    //console.log(req.body);
+    console.log(req.body.users);
     db.connect(done);
 
+
+
     function done(){
-        var pool = db.get();
-        var events = [];
-        pool.query('SELECT * FROM adminkey', function(err, results){         
-            console.log(Date(results[0].genDate));
-            console.log(results[0].accountCreationKey);
-            events.push({"key":results[0].accountCreationKey, "date":results[0].genDate});
-            console.log(events);
-            res.status(200).json(events); 
-        });
+        //var pool = db.get();
+        // var events = [];
+
+        // var nUsers = Object.keys(users);
+        // async.each(nUsers, function(user){
+
+        // });
         
+        // for(var i = 0; i < users.length; i++){
+        //     if(users[i].isAdmin == true){
+        //         var pool2 = db.get();
+        //         pool2.query('UPDATE useraccount SET userType = ? WHERE userId = ?',['admin',users[i].userId], function(err, results){ 
+        //             console.log("Updated!");
+        //             res.status(200);
+        //         });
+        //     }else{
+        //         var pool3 = db.get();
+        //         pool3.query('UPDATE useraccount SET userType = ? WHERE userId = ?',['volunteer',users[i].userId], function(err, results){
+        //             res.status(200); 
+        //         });
+        //     }
+        // }
+        
+        // for(var j = 0; j < diff.length; j++){
+            
+        // }
     }
 });
 
