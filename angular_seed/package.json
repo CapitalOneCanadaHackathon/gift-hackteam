@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "async": "^2.1.2",
+    "body-parser": "^1.15.2",
     "grunt-injector": "^1.1.0",
     "grunt-wiredep": "^3.0.1",
     "mysql": "^2.11.1"
