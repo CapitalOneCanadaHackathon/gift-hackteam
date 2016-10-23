@@ -24,7 +24,7 @@
     "angular-ui-calendar": "~1.0.2",
     "bootstrap": "^3.3.7",
     "font-awesome": "fontawesome#~4.6.3",
-    "ngstorage": "^0.3.11"
+    "ngstorage": "~0.3.11"
   },
   "resolutions": {
     "angular": "^1.5.8",
