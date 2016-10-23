@@ -15,12 +15,7 @@
             controller: 'UsersController',
             controllerAs: 'vm'
         })
-        /*
-        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-        .state('home', {
-            // we'll get to this in a bit       
-        });
-       */ 
+     
 });
     
 })();

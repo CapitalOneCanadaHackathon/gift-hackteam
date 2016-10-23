@@ -2,7 +2,7 @@
     'use strict';
     angular.module('faver.admin').controller('AdminController', AdminController);
 
-    function AdminController(AdminService){
+    function AdminController(AdminService,LoginService){
         var vm = this;
 
         vm.numAdmin = 0;
@@ -65,6 +65,10 @@
         };
 
         vm.setUpPage();
+
+        //confirm the user has logged in on page load
+        //TODO: should do this and confirm before making database calls
+        LoginService.confirmSession();
 
     }
 })();

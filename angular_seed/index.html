@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
     <link rel="stylesheet" href="app/css/mainApp.css"/>
     <link rel="stylesheet" href="app/css/event.css"/>
+    <link rel="stylesheet" href="app/css/login.css"/>
 
 
     <!-- JS (load angular, ui-router, and our custom js file) -->
@@ -20,12 +21,48 @@
 </head>
 
 <!-- apply our angular app to our site -->
-<body >
+<body>
 
 <!-- NAVIGATION -->
-<!--
-<nav class="navbar navbar-inverse" role="navigation">
-</nav> -->
+
+<nav class="navbar navbar-default navbar-centered" ng-hide="'login' | isState">
+            <div class="navbar-header page-scroll">
+                <button type"button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>      
+            
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                     <li>
+                        <a ui-sref='home'>HOME</a>
+                    </li>
+                    <li>
+                        <a ui-sref='profile'>PROFILE</a>
+                    </li>
+                    <li>
+                        <a ui-sref='users'>USERS</a>
+                    </li>
+                    <li>
+                        <a ui-sref='admin'>ADMIN</a>
+                    </li>
+                    <li>
+                        <a ui-sref='stats'>STATS</a>
+                    </li>
+                    <li>
+                        <a ui-sref='login'>SIGN OUT</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- /.navbar-collapse -->
+
+      
+    </nav>
 
 <!-- MAIN CONTENT -->
 <div class="container">
@@ -42,6 +79,7 @@
 <script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
 <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/ngstorage/ngStorage.js"></script>
 <!-- endbower -->
 
     <!-- injector:js -->
@@ -59,6 +97,9 @@
     <script src="app/services/adminService.js"></script>
     <script src="app/services/apiService.js"></script>
     <script src="app/services/eventService.js"></script>
+    <script src="app/services/loginService.js"></script>
+    <script src="app/services/profileService.js"></script>
+    <script src="app/services/usersService.js"></script>
     <script src="app/view/admin/admin.controller.js"></script>
     <script src="app/view/admin/admin.route.js"></script>
     <script src="app/view/createAccount/createAccount.controller.js"></script>

@@ -10,8 +10,8 @@ exports.connect = function(done) {
   state.pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: '123456',
-    database: 'testvas'
+    password: '1234',
+    database: 'faverdb'
   });
   done();
 }

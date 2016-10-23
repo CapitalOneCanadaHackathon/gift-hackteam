@@ -7,6 +7,19 @@
     function ApiService($q, $http) {
 
         var apiService = {};
+        var userInfo = {//TODO remove once real data is returned 
+            userID:"1",
+            userType:"admin" //Admin or Volunteer
+        };
+        // ---- LOGIN ---- //
+
+        //validate login credentials
+        //return userID
+        apiService.validateLoginCredentials = function (email,password) {
+            var q = $q.defer();
+            q.resolve(userInfo);
+            return q.promise;
+        }
 
         // ---- EVENTS ---- //
 
@@ -14,7 +27,6 @@
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
-        var userID = "123ecg";
 
         apiService.monthlyEvents = [
         ];
@@ -82,13 +94,10 @@
 
         //adds the current user to the attendee list for an event
         //parameters: eventID, userID
-        apiService.attendEvent = function (eventID) {
-            // var q = $q.defer();
-            // q.resolve();
-            // return q.promise;
-            //TODO: connect to server.js
-            
-            var promisePost = $http.post('api/attendEvent', { "eventId" :eventID, "userId": 1})
+        apiService.attendEvent = function (eventID,userID) {
+
+            console.log(userID);
+            var promisePost = $http.post('api/attendEvent', { "eventId" :eventID, "userId": userID})
 		    .success(function(data, status) {
                 console.log(data);
 		    })
@@ -101,12 +110,10 @@
 
          //leaves the current event and remove user from attendee list
          //parameters: eventID, userID
-        apiService.leaveEvent = function (eventID) {
-            // var q = $q.defer();
-            // q.resolve();
-            // return q.promise;
-            //TODO: connect to server.js
-            var promisePost = $http.post('api/leaveEvent', { "eventId" :eventID, "userId": 1})
+        apiService.leaveEvent = function (eventID,userID) {
+           
+            console.log(eventID);
+            var promisePost = $http.post('api/leaveEvent', { "eventId" :eventID, "userId": userID})
 		    .success(function(data, status) {
                 console.log(data);
 		    })
@@ -121,7 +128,6 @@
         //and who visited the event in logs
         //parameters: eventID, userID
         apiService.visitedEvent = function (eventID) {
-            //TODO: connect to server.js
             var promisePost = $http.post('api/visitedEventPage', { "eventId" :eventID})
 		    .success(function(data, status) {
                 console.log(data);
@@ -133,9 +139,6 @@
     		return promisePost;
             
         }
-
-            
-        
 
         // ---- ADMIN ---- //
 
@@ -201,6 +204,7 @@
         // for saving users
         apiService.saveUsers = function(users, diff) {
 
+<<<<<<< HEAD
              var promisePost = $http.post('api/saveUsers', {"users": users, "diff":diff})
 		    .success(function(data, status) {
                 console.log(data);
@@ -211,8 +215,44 @@
 		    });
             
     		return promisePost;
+=======
+            // db insert
+            var q = $q.defer();
+            q.resolve();
+            return q.promise;
+		}
+>>>>>>> 052060525082c56812138ea1072fc515b9f8b382
 
+        // ---- USERS ---- //
+
+        apiService.userProfile = {
+            firstName:"Frank",
+            lastName:"Kang",
+            userEmail:"Frank.Kang@live.com",
+            myStory:"Hi, my name is Frank Kang",
+            tag:"#hackathon"
         };
+
+        //Retreive user profile
+        apiService.getUserProfile = function(){
+            var q = $q.defer();
+            q.resolve(apiService.userProfile);
+            return q.promise;
+        }
+
+        apiService.users = [
+            {firstName: "Frank", lastName: "Kang", userEmail: "Frank.Kang@live.com", description: "Hi, my name is Frank Kang"},
+            {firstName: "Rebecca", lastName: "Song", userEmail: "Rebecca.Song@live.com", description: "Hi my name is Rebecca Song"},
+            {firstName: "Erin", lastName: "Gallagher", userEmail: "Erin.Gallagher@live.com", description: "Hi my name is Erin Gallagher"},
+            {firstName: "Anthony", lastName: "Lionti", userEmail: "Anthony.Lionti@live.com", description: "Hi my name is Anthony Lionti"}
+        ];
+
+        //retrieve all users in the system
+        apiService.getUsersList = function(){
+            var q = $q.defer();
+            q.resolve(apiService.users);
+            return q.promise;
+        }
 
         return apiService;
     }

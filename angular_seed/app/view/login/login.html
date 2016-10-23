@@ -1,4 +1,23 @@
-<div>
-    <h1>Login Page</h1>
-    <p>{{vm.test}}</p>
+<div class="box">
+    <form ng-submit="formSubmit()" class="form">
+        <div class="row" style="padding:30px;">
+            <div class="col-xs-12">
+                <img src="app\img\user-flat-login.png" height="150px" width="150px">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-xs-2">Login</label>
+            <input type="email" class="form-control" ng-model="vm.login.email" placeholder="123@email.com" required=""></input>
+        </div>
+        <div class="row form-group">
+            <label class="col-xs-2">Password</label>
+            <input type="password" class="form-control" ng-model="vm.login.password" placeholder="*********" required=""></input>
+        </div>
+        <div class="row inline">
+            <div class="col-xs-12"><button type="submit" class="btn">Login</button></div>
+        </div>
+        <div class="row inline">
+            <div class="col-xs-12"><a href="">Don't Have an Account? Sing Up</div>
+        </div>
+    </form>
 </div>
