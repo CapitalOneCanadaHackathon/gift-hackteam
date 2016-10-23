@@ -15,6 +15,7 @@
             var q = $q.defer();
             ApiService.getKeyCode()
                 .then(function(data) {
+                    console.log(data);
                     adminService.keyCode.key = data.key;
                     adminService.keyCode.date = data.date;
                     adminService.generateKey();

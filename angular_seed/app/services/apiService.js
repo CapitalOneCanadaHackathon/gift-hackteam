@@ -25,7 +25,7 @@
             // q.resolve(apiService.monthlyEvents);
             // return q.promise;
 
-            //var promisePost = // Simple GET request example:
+            //var promisePost = 
             // $http({
             //     method: 'POST',
             //     url: '/api/postTest',
@@ -36,51 +36,85 @@
             //     console.log("error has occurred!");
             // });
 		    
-            var promisePost = $http({
-                method: 'GET',
-                url: '/api/getEvents',
-            }).then(function successCallback(response) {
-                console.log(response);
-                apiService.monthlyEvents = response.data;
-            }, function errorCallback(response) {
-                console.log("error has occurred!");
-            });
-		    
+            // var promisePost = $http({
+            //     method: 'GET',
+            //     url: '/api/getEvents',
+            // }).then(function successCallback(response) {
+            //     console.log(response);
+            //     apiService.monthlyEvents = response.data;
+            //     console.log(apiService.monthlyEvents);
+            // }, function errorCallback(response) {
+            //     console.log("error has occurred!");
+            // });
 
-            return promisePost;
+
+             var promisePost = $http.get('/api/getEvents', {})
+                  .success(function(data, status) {
+                  })
+                  .error(function(data, status) {
+                     console.log("Error has occured!");
+                  });
+  
+  		    return promisePost;
         }
 
-        apiService.attendees = [
-            { firstName: "Erin", lastName: "Gallagher", userID:"123ecg" },
-            { firstName: "Rebeccaa", lastName: "Song", userID:"122dewg" },
-            { firstName: "Mark", lastName: "Water", userID:"3ecweg" },
-            { firstName: "Annelise", lastName: "Jade", userID:"574ecg" }
-        ];
+        // apiService.attendees = [
+        //     // { firstName: "Erin", lastName: "Gallagher", userID:"123ecg" },
+        //     // { firstName: "Rebeccaa", lastName: "Song", userID:"122dewg" },
+        //     // { firstName: "Mark", lastName: "Water", userID:"3ecweg" },
+        //     // { firstName: "Annelise", lastName: "Jade", userID:"574ecg" }
+        // ];
 
         //returns the list of attendees for an event
         apiService.getAttendees = function (eventID) {
-            var q = $q.defer();
-            q.resolve(apiService.attendees);
-            return q.promise;
-            //TODO: connect to server.js
+            //hardcoded userid
+            var promisePost = $http.post('api/getAttendees', { "eventId" :eventID})
+		    .success(function(data, status) {
+                console.log(data);
+		    })
+		    .error(function(data, status) {
+		    	return 'error';
+   
+		    });
+
+    		return promisePost;
         }
 
         //adds the current user to the attendee list for an event
         //parameters: eventID, userID
         apiService.attendEvent = function (eventID) {
-            var q = $q.defer();
-            q.resolve();
-            return q.promise;
+            // var q = $q.defer();
+            // q.resolve();
+            // return q.promise;
             //TODO: connect to server.js
+            
+            var promisePost = $http.post('api/attendEvent', { "eventId" :eventID, "userId": 1})
+		    .success(function(data, status) {
+                console.log(data);
+		    })
+		    .error(function(data, status) {
+		    	return 'error';
+		    });
+
+    		return promisePost;
         }
 
          //leaves the current event and remove user from attendee list
          //parameters: eventID, userID
         apiService.leaveEvent = function (eventID) {
-            var q = $q.defer();
-            q.resolve();
-            return q.promise;
+            // var q = $q.defer();
+            // q.resolve();
+            // return q.promise;
             //TODO: connect to server.js
+            var promisePost = $http.post('api/leaveEvent', { "eventId" :eventID, "userId": 1})
+		    .success(function(data, status) {
+                console.log(data);
+		    })
+		    .error(function(data, status) {
+		    	return 'error';
+		    });
+
+    		return promisePost;
         }
 
         //updates the total number of people who visited the event
@@ -88,7 +122,16 @@
         //parameters: eventID, userID
         apiService.visitedEvent = function (eventID) {
             //TODO: connect to server.js
+            var promisePost = $http.post('api/visitedEventPage', { "eventId" :eventID})
+		    .success(function(data, status) {
+                console.log(data);
+		    })
+		    .error(function(data, status) {
+		    	return 'error';
+		    });
             console.log("user visited page, updating db....");
+    		return promisePost;
+            
         }
 
             
@@ -102,12 +145,34 @@
             "key": "AfL24Jfm1GKLylme234Po63M"  
         };
 
+        apiService.updateKey = function(key){
+            var promisePost = $http.post('api/updateKey', { "key" :key})
+		    .success(function(data, status) {
+                console.log(data);
+		    })
+		    .error(function(data, status) {
+		    	return 'error';
+		    });
+            
+    		return promisePost;
+            
+        };
+
         apiService.getKeyCode = function() {
 
-            var q = $q.defer();
-            q.resolve(apiService.keyCode);
-            return q.promise;
-
+            // var q = $q.defer();
+            // q.resolve(apiService.keyCode);
+            // return q.promise;
+            var promisePost = $http.post('api/adminInfo')
+		    .success(function(data, status) {
+                console.log(data);
+		    })
+		    .error(function(data, status) {
+		    	return 'error';
+		    });
+            
+    		return promisePost;
+                
         };
 
         // for retrieving the users
