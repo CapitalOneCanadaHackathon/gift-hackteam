@@ -1,4 +1,41 @@
 <div>
     <h1>Analytics Page</h1>
-    <p>{{vm.test}}</p>
+
+    <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active"><a data-target="#events" aria-controls="events" role="tab" data-toggle="tab">Events</a></li>
+            <li><a data-target="#volunteers" aria-controls="volunteers" role="tab" data-toggle="tab">Volunteers</a></li>
+            <li><a data-target="#community" aria-controls="community" role="tab" data-toggle="tab">Community</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="events">
+                In Events
+            </div>
+            <div role="tabpanel" class="tab-pane" id="volunteers">
+                <h3>Organizational Growth</h3>
+                <div class="form-group">
+                    <label for="growthYear" class="col-sm-2 control-label" >Year: </label>
+                    <div class="col-sm-2">
+                        <select id="growthYear">
+                            <option value="2016">2016</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div id="growthChart" style="height: 500px; width: 80%; margin: 20px auto;"></div>
+                <hr />
+                <h3>Login Activity</h3>
+                <div id="loginChart" style="height: 500px; width: 80%; margin: 20px auto;"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="community">
+                In Community
+            </div>
+        </div>
+    </div>
+
+    <!--<ul class="nav nav-tabs">
+        <li class="active"><a href="#">Events</a></li>
+        <li><a href="#">Volunteers</a></li>
+        <li><a href="#">Community</a></li>
+    </ul>-->
 </div>
