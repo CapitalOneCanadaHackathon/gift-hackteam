@@ -20,7 +20,7 @@
                 title:eventObj.title,
                 start: new Date(eventObj.start),
                 end: new Date(eventObj.end),
-                eventID: eventObj.eventID,
+                eventID: eventObj.eventId,
                 type: eventObj.type,
                 location: eventObj.location, 
                 description: eventObj.description,

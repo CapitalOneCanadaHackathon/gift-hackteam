@@ -184,12 +184,14 @@
                             "id": "eventsId",
                             "axisAlpha": 0,
                             "position": "left",
-                            "title": "Number of Events"
+                            "title": "Number of Events",
+                            "gridThickness": 0
                         }, {
                             "id": "attendanceId",
                             "axisAlpha": 0,
                             "position": "right",
-                            "title": "Number of Attendees"
+                            "title": "Number of Attendees",
+                            "gridThickness": 0
                         }],
                         "startDuration": 1,
                         "titles":[
