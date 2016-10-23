@@ -204,7 +204,7 @@
         // for saving users
         apiService.saveUsers = function(users, diff) {
 
-<<<<<<< HEAD
+
              var promisePost = $http.post('api/saveUsers', {"users": users, "diff":diff})
 		    .success(function(data, status) {
                 console.log(data);
@@ -215,13 +215,9 @@
 		    });
             
     		return promisePost;
-=======
-            // db insert
-            var q = $q.defer();
-            q.resolve();
-            return q.promise;
+
 		}
->>>>>>> 052060525082c56812138ea1072fc515b9f8b382
+
 
         // ---- USERS ---- //
 
