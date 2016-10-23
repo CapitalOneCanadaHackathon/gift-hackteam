@@ -8,6 +8,15 @@
 
         var apiService = {};
 
+        // ---- LOGIN ---- //
+
+        //retrieve all events
+        apiService.validateLoginCredentials = function (email,password) {
+            var q = $q.defer();
+            q.resolve();
+            return q.promise;
+        }
+
         // ---- EVENTS ---- //
 
         var date = new Date();
@@ -73,19 +82,6 @@
             console.log("user visited page, updating db....");
         }
 
-            /*
-            var promisePost = $http.post('/test', {})
-                .success(function(data, status) {
-
-                })
-                .error(function(data, status) {
-
-    
-                });
-
-		    return promisePost;
-
-            */
 
         // ---- ADMIN ---- //
 
