@@ -4,10 +4,6 @@
 
     UsersController.$inject = ['$scope','UsersService'];
 
-  
-
-
-
     function UsersController($scope, UsersService){
     	
     	$scope.firstNameList = [];

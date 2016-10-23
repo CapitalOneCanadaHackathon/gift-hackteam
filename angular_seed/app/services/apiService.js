@@ -127,7 +127,7 @@
             return q.promise;
 		}
 
-
+        // ---- USERS ---- //
 
         apiService.users = [
             {firstName: "Frank", lastName: "Kang", userEmail: "Frank.Kang@live.com", description: "Hi, my name is Frank Kang"},

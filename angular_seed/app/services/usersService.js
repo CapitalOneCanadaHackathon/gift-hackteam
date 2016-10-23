@@ -14,6 +14,8 @@
         usersService.getUsersList = function() {
             ApiService.getUsersList()
                 .then(function(data){
+                    var numEvents = usersService.usersList.length;
+		           usersService.usersList.splice(0,numEvents);
                     for(var i = 0; i<data.length; i++){//pushing data one by one
                         usersService.usersList.push(data[i]);
                     }
