@@ -24,7 +24,8 @@
                 });
         }
 
-        //this will be executed when coming from signout 
+        //this will be executed when coming from signout
+        //session is destroyed so they must log in again 
         delete $sessionStorage.userID;
         
     }
