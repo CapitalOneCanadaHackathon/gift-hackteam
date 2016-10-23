@@ -42,6 +42,19 @@
 
         };
 
+        vm.emailAllUsers = function() {
+            var emails = "";
+            for (var i = 0; i < vm.editUsersList.length; i++) {
+                var user = vm.editUsersList[i];
+                emails += user.email;
+                if (i != (vm.editUsersList.length-1)) {
+                    emails += ",";
+                }
+            }
+            window.open("mailto:" + emails);
+
+        };
+
         // set up the page by retrieving the key code
         // and the list of users
         vm.setUpPage = function() {
