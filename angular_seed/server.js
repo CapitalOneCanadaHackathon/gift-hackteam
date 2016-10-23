@@ -149,7 +149,7 @@ app.post('/api/visitedEventPage', function(req, res){
 
 app.post('/api/getAdminInfo', function(req, res){
 
-    var key = req.body.key;
+    
     //console.log(req.body);
     db.connect(done);
 
@@ -258,6 +258,50 @@ app.post('/api/saveUsers', function(req, res){
             events.push({"key":results[0].accountCreationKey, "date":results[0].genDate});
             console.log(events);
             res.status(200).json(events); 
+        });
+        
+    }
+});
+
+app.post('/api/getUserProfile', function(req, res){
+
+    
+    id = req.body.id;
+    db.connect(done);
+
+
+    function done(){
+        var pool = db.get();
+        var user = {};
+        
+        pool.query('SELECT * FROM useraccount WHERE userId = ?',[id], function(err, results){
+            console.log(results);
+            user = {"firstName":results[0].firstName,"lastName":results[0].lastName, "userEmail":results[0].userEmail, "myStory":results[0].description};
+            console.log(user);
+            res.status(200).json(user); 
+        });
+        
+    }
+});
+
+app.post('/api/getProfiles', function(req, res){
+
+    
+    db.connect(done);
+
+
+    function done(){
+        var pool = db.get();
+        var users = [];
+        
+        pool.query('SELECT * FROM useraccount', function(err, results){
+
+            for(var i = 0; i < results.length; i++){
+                users.push({"firstName":results[i].firstName, "lastName":results[i].lastName, "userEmail":results[i].userEmail});
+            } 
+            
+            console.log(users);
+            res.status(200).json(users); 
         });
         
     }

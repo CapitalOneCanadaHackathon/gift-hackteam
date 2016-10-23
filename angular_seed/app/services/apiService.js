@@ -221,33 +221,57 @@
 
         // ---- USERS ---- //
 
-        apiService.userProfile = {
-            firstName:"Frank",
-            lastName:"Kang",
-            userEmail:"Frank.Kang@live.com",
-            myStory:"I worked as a programmer for 3 years, which made for a easy transition into technical writing at the end of 2011. I found that having a background in Computer Science with a penchant for  english language gave me the wherewithal to succeed in this field. When I got into technical writing, I found that I enjoyed translating complex, jargon-driven technical information into everyday language that anyone could easily understand. Because I came from a programming background, I was able to translate ideas while keeping their scientific integrity.",
-            tag:"#hackathon"
-        };
+        // apiService.userProfile = {
+        //     firstName:"Frank",
+        //     lastName:"Kang",
+        //     userEmail:"Frank.Kang@live.com",
+        //     myStory:"I worked as a programmer for 3 years, which made for a easy transition into technical writing at the end of 2011. I found that having a background in Computer Science with a penchant for  english language gave me the wherewithal to succeed in this field. When I got into technical writing, I found that I enjoyed translating complex, jargon-driven technical information into everyday language that anyone could easily understand. Because I came from a programming background, I was able to translate ideas while keeping their scientific integrity.",
+        //     tag:"#hackathon"
+        // };
 
         //Retreive user profile
-        apiService.getUserProfile = function(){
-            var q = $q.defer();
-            q.resolve(apiService.userProfile);
-            return q.promise;
+        apiService.getUserProfile = function(id){
+
+            var promisePost = $http.post('api/getUserProfile',{"id":id})
+		    .success(function(data, status) {
+                console.log(data);
+		    })
+		    .error(function(data, status) {
+                console.log(status);
+		    	return 'error';
+		    });
+            
+    		return promisePost;
+
+
+            // var q = $q.defer();
+            // q.resolve(apiService.userProfile);
+            // return q.promise;
         }
 
-        apiService.users = [
-            {firstName: "Frank", lastName: "Kang", userEmail: "Frank.Kang@live.com", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut metus sed mi imperdiet facilisis id faucibus tortor. Nullam accumsan lorem a aliquet aliquam. Ut porta sem sed orci porttitor, in ornare eros tempor. Vestibulum sollicitudin orci at risus rutrum congue. Suspendisse venenatis facilisis purus, id dignissim ex vulputate vel. Quisque euismod fringilla volutpat. Vivamus et quam sed dui suscipit egestas. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque felis dui, pretium a libero id, efficitur auctor ipsum. Vivamus purus tellus, pretium sit amet facilisis eget, tincidunt vel magna. Suspendisse quis sollicitudin risus, ut finibus enim. Curabitur sem ante, vulputate at sollicitudin in, ornare quis velit. Fusce in dui eu urna feugiat lacinia vel ac enim. Aliquam ut tristique dolor. Curabitur imperdiet diam vel odio tincidunt, non molestie tellus ornare. Donec id diam fringilla, tempus dolor eu, ullamcorper metus. Morbi pellentesque ac ligula luctus tincidunt. Aenean maximus urna sed magna posuere, dapibus ullamcorper ex pellentesque."},
-            {firstName: "Rebecca", lastName: "Song", userEmail: "Rebecca.Song@live.com", description: "Hi my name is Rebecca Song"},
-            {firstName: "Erin", lastName: "Gallagher", userEmail: "Erin.Gallagher@live.com", description: "Hi my name is Erin Gallagher"},
-            {firstName: "Anthony", lastName: "Lionti", userEmail: "Anthony.Lionti@live.com", description: "Hi my name is Anthony Lionti"}
-        ];
+        // apiService.users = [
+        //     {firstName: "Frank", lastName: "Kang", userEmail: "Frank.Kang@live.com", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut metus sed mi imperdiet facilisis id faucibus tortor. Nullam accumsan lorem a aliquet aliquam. Ut porta sem sed orci porttitor, in ornare eros tempor. Vestibulum sollicitudin orci at risus rutrum congue. Suspendisse venenatis facilisis purus, id dignissim ex vulputate vel. Quisque euismod fringilla volutpat. Vivamus et quam sed dui suscipit egestas. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque felis dui, pretium a libero id, efficitur auctor ipsum. Vivamus purus tellus, pretium sit amet facilisis eget, tincidunt vel magna. Suspendisse quis sollicitudin risus, ut finibus enim. Curabitur sem ante, vulputate at sollicitudin in, ornare quis velit. Fusce in dui eu urna feugiat lacinia vel ac enim. Aliquam ut tristique dolor. Curabitur imperdiet diam vel odio tincidunt, non molestie tellus ornare. Donec id diam fringilla, tempus dolor eu, ullamcorper metus. Morbi pellentesque ac ligula luctus tincidunt. Aenean maximus urna sed magna posuere, dapibus ullamcorper ex pellentesque."},
+        //     {firstName: "Rebecca", lastName: "Song", userEmail: "Rebecca.Song@live.com", description: "Hi my name is Rebecca Song"},
+        //     {firstName: "Erin", lastName: "Gallagher", userEmail: "Erin.Gallagher@live.com", description: "Hi my name is Erin Gallagher"},
+        //     {firstName: "Anthony", lastName: "Lionti", userEmail: "Anthony.Lionti@live.com", description: "Hi my name is Anthony Lionti"}
+        // ];
 
         //retrieve all users in the system
         apiService.getUsersList = function(){
-            var q = $q.defer();
-            q.resolve(apiService.users);
-            return q.promise;
+            // var q = $q.defer();
+            // q.resolve(apiService.users);
+            // return q.promise;
+            
+            var promisePost = $http.post('api/getProfiles')
+		    .success(function(data, status) {
+                console.log(data);
+		    })
+		    .error(function(data, status) {
+                console.log(status);
+		    	return 'error';
+		    });
+            
+    		return promisePost;
         }
        
         // ---- STATS ---- //
