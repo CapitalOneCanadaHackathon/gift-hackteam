@@ -8,6 +8,7 @@
         'faver.users',
 	    'faver.profile',
         'faver.admin',
+        'faver.stats',
         'faver.event'
 
     ]);
