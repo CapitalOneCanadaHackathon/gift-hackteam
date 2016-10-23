@@ -2,13 +2,12 @@
     'use strict';
     angular.module('faver.profile').controller('profileController', profileController);
 
-    function profileController(){
+    function profileController(ProfileService){
         var vm = this;
-        vm.firstName = "Frank";
-        vm.lastName = "Kang";
-        vm.userEmail = "Frank.Kang@live.com";
-        vm.myStory = "Hi, my name is Frank Kang";
-        vm.tag = "#hackathon";
+        vm.profile = {};
+        vm.profile.userProfile = ProfileService.usersList;
         
+        //retirve user profile
+        ProfileService.getProfile();
     }
 })();

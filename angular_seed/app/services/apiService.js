@@ -129,6 +129,21 @@
 
         // ---- USERS ---- //
 
+        apiService.userProfile = {
+            firstName:"Frank",
+            lastName:"Kang",
+            userEmail:"Frank.Kang@live.com",
+            myStory:"Hi, my name is Frank Kang",
+            tag:"#hackathon"
+        };
+
+        //Retreive user profile
+        apiService.getUserProfile = function(){
+            var q = $q.defer();
+            q.resolve(apiService.userProfile);
+            return q.promise;
+        }
+
         apiService.users = [
             {firstName: "Frank", lastName: "Kang", userEmail: "Frank.Kang@live.com", description: "Hi, my name is Frank Kang"},
             {firstName: "Rebecca", lastName: "Song", userEmail: "Rebecca.Song@live.com", description: "Hi my name is Rebecca Song"},
@@ -136,13 +151,7 @@
             {firstName: "Anthony", lastName: "Lionti", userEmail: "Anthony.Lionti@live.com", description: "Hi my name is Anthony Lionti"}
         ];
 
-        //Retreive user profile
-        apiService.getUserProfile = function(){
-            var q = $q.defer();
-            q.resolve(apiService.users);
-            return q.promise;
-        }
-
+        //retrieve all users in the system
         apiService.getUsersList = function(){
             var q = $q.defer();
             q.resolve(apiService.users);
