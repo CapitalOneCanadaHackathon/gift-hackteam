@@ -84,7 +84,16 @@ app.post('/api/attendEvent', function(req, res){
         var pool = db.get();
         var events = [];
         pool.query('INSERT INTO eventattendance(eventId, userId, willAttend) VALUES (?,?,1)',[eventId, userId], function(err, results){         
-            res.status(200).json(events); 
+            res.status(200).json(events);
+            var pool2 = db.get();
+            pool2.query('SELECT * FROM eventslog WHERE eventId = ?',[eventId], function(err, results){  
+                var count = results[0].numAttendees;
+                count++;
+                var pool3 = db.get();
+                pool3.query('UPDATE eventslog SET numAttendees = ? WHERE eventId = ?', [count, eventId], function(err, results){
+                
+                });
+            });
         });
     }
     //TODO:not udating the numAtendees number in eventslogs
@@ -102,7 +111,16 @@ app.post('/api/leaveEvent', function(req, res){
         var pool = db.get();
         var events = [];
         pool.query('DELETE FROM eventattendance WHERE eventId = ? AND userId = ?',[eventId, userId], function(err, results){         
-            res.status(200).json(events); 
+            res.status(200).json(events);
+            var pool2 = db.get();
+            pool2.query('SELECT * FROM eventslog WHERE eventId = ?',[eventId], function(err, results){  
+                var count = results[0].numAttendees;
+                count--;
+                var pool3 = db.get();
+                pool3.query('UPDATE eventslog SET numAttendees = ? WHERE eventId = ?', [count, eventId], function(err, results){
+                
+                });
+            }); 
         });
     }
     //TODO:not udating the numAtendees number in eventslogs
