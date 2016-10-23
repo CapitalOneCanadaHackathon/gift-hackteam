@@ -43,8 +43,8 @@
         </tfoot>
         <tbody>
             <tr ng-repeat="user in usersList | orderBy:sortType:sortReverse | filter:searchUser">
-                <td>{{user.firstName}}</td>
-                <td>{{user.lastName}}</td>
+                <td><a href="#/profile"> {{user.firstName}}</a></td>
+                <td><a href="#/profile"> {{user.lastName}}</td>
                 <td><a href="mailto:{{user.userEmail}} "> {{user.userEmail}}</a></td>
                 <td>
                 	<input type="checkbox" ng-model="selected" ng-change="change()" id="user.userEmail" >
