@@ -23,6 +23,9 @@
                     alert("error retrieving events");
                 });
         }
+
+        //this will be executed when coming from signout 
+        delete $sessionStorage.userID;
         
     }
 })();
