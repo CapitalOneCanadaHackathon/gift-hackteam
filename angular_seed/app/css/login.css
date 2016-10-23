@@ -1,0 +1,20 @@
+
+.box {
+    width: 60%;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top:40px;
+}
+
+input {
+    width:100%;
+}
+
+label {
+    text-align:left;
+}

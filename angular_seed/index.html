@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
     <link rel="stylesheet" href="app/css/mainApp.css"/>
     <link rel="stylesheet" href="app/css/event.css"/>
+    <link rel="stylesheet" href="app/css/login.css"/>
 
 
     <!-- JS (load angular, ui-router, and our custom js file) -->
@@ -24,7 +25,7 @@
 
 <!-- NAVIGATION -->
 
-<nav class="navbar navbar-default navbar-centered">
+<nav class="navbar navbar-default navbar-centered" ng-hide="'login' | isState">
             <div class="navbar-header page-scroll">
                 <button type"button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
