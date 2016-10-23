@@ -2,9 +2,9 @@
     'use strict';
     angular.module('faver.core').service('EventService', EventService);
 
-    EventService.$inject = ['$q','ApiService'];
+    EventService.$inject = ['$q','ApiService','$sessionStorage'];
 
-    function EventService($q,ApiService){
+    function EventService($q,ApiService,$sessionStorage){
 
         var eventService = {};
 
@@ -38,6 +38,7 @@
                         eventService.monthlyEvents.push(data[i]);
                     }
                     console.log(eventService.monthlyEvents);
+                    console.log($sessionStorage.userID);
                 },
                 function(err){
                     alert("error retrieving events");

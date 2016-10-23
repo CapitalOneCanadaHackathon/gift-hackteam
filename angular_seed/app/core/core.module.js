@@ -2,7 +2,8 @@
     'use strict';
     angular.module('faver.core', [
         'ui.router',
-        'ui.calendar'
+        'ui.calendar',
+        'ngStorage'
 
     ]);
 })();

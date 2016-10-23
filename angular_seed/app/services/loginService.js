@@ -11,8 +11,8 @@
         loginService.validate = function(email,password) {
             var q = $q.defer();
             ApiService.validateLoginCredentials(email,password)
-                .then(function(){
-                    q.resolve();
+                .then(function(userID){
+                    q.resolve(userID);
                 },
                 function(err){
                     alert("error could not attend event");

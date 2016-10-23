@@ -7,13 +7,15 @@
     function ApiService($q) {
 
         var apiService = {};
+        var userID = "123ecg"; //TODO remove once real data is returned
 
         // ---- LOGIN ---- //
 
-        //retrieve all events
+        //validate login credentials
+        //return userID
         apiService.validateLoginCredentials = function (email,password) {
             var q = $q.defer();
-            q.resolve();
+            q.resolve(userID);
             return q.promise;
         }
 
@@ -23,7 +25,6 @@
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
-        var userID = "123ecg";
 
         apiService.monthlyEvents = [
             { title: 'All Day Event', start: new Date(y, m, 1), eventID: 1, type: "volunteer-meeting", location: "123 address st.", description: "this is a great meeting", createdBy:"12", numVolunNeeded:5, numAttendees:3},
