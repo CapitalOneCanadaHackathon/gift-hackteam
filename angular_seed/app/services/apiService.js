@@ -148,7 +148,7 @@
         apiService.updateKey = function(key){
             var promisePost = $http.post('api/updateKey', { "key" :key})
 		    .success(function(data, status) {
-                console.log(data);
+                //console.log(data);
 		    })
 		    .error(function(data, status) {
 		    	return 'error';
@@ -163,9 +163,9 @@
             // var q = $q.defer();
             // q.resolve(apiService.keyCode);
             // return q.promise;
-            var promisePost = $http.post('api/adminInfo')
+            var promisePost = $http.post('api/getAdminInfo')
 		    .success(function(data, status) {
-                console.log(data);
+                console.log(data[0]);
 		    })
 		    .error(function(data, status) {
 		    	return 'error';
@@ -176,28 +176,41 @@
         };
 
         // for retrieving the users
-        apiService.users = [
-            { "firstname": "Person", "lastname": "One", "email": "personone@email.com", "isAdmin": false },
-            { "firstname": "Person", "lastname": "Two", "email": "persontwo@email.com", "isAdmin": true },
-            { "firstname": "Person", "lastname": "Three", "email": "personthree@email.com", "isAdmin": false },
-            { "firstname": "Person", "lastname": "Four", "email": "personfour@email.com", "isAdmin": true },
-            { "firstname": "Person", "lastname": "Five", "email": "personfive@email.com", "isAdmin": false },
-            { "firstname": "Person", "lastname": "Six","email": "personsix@email.com", "isAdmin": true }
-        ];
+        // apiService.users = [
+        //     { "firstname": "Person", "lastname": "One", "email": "personone@email.com", "isAdmin": false },
+        //     { "firstname": "Person", "lastname": "Two", "email": "persontwo@email.com", "isAdmin": true },
+        //     { "firstname": "Person", "lastname": "Three", "email": "personthree@email.com", "isAdmin": false },
+        //     { "firstname": "Person", "lastname": "Four", "email": "personfour@email.com", "isAdmin": true },
+        //     { "firstname": "Person", "lastname": "Five", "email": "personfive@email.com", "isAdmin": false },
+        //     { "firstname": "Person", "lastname": "Six","email": "personsix@email.com", "isAdmin": true }
+        // ];
 
         apiService.getUsers = function() {
-            var q = $q.defer();
-            q.resolve(apiService.users);
-            return q.promise;
+             var promisePost = $http.post('api/getUsers')
+		    .success(function(data, status) {
+                console.log(data);
+		    })
+		    .error(function(data, status) {
+                console.log(status);
+		    	return 'error';
+		    });
+            
+    		return promisePost;
         };
 
         // for saving users
-        apiService.saveUsers = function(users) {
+        apiService.saveUsers = function(users, diff) {
 
-            // db insert
-            var q = $q.defer();
-            q.resolve();
-            return q.promise;
+             var promisePost = $http.post('api/saveUsers', {"users": users, "diff":diff})
+		    .success(function(data, status) {
+                console.log(data);
+		    })
+		    .error(function(data, status) {
+                console.log(status);
+		    	return 'error';
+		    });
+            
+    		return promisePost;
 
         };
 
