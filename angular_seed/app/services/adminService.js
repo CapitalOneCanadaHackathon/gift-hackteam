@@ -49,6 +49,9 @@
             ApiService.getUsers()
                 .then(function(data) {
                     console.log(data.data);
+                    var numEvents = adminService.users.length;
+                    var newData = data.data;
+                    adminService.users.splice(0, numEvents);
                     for (var i = 0; i < data.data.length; i++) {
                         adminService.users.push(data.data[i]);
                         // adminService.editUsersList.push(data[i]);
