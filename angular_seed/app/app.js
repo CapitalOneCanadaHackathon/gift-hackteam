@@ -9,6 +9,5 @@
 	    'faver.profile',
         'faver.admin',
         'faver.event'
-
     ]);
 })();

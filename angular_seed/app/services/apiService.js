@@ -125,8 +125,29 @@
             var q = $q.defer();
             q.resolve();
             return q.promise;
+		}
 
-        };
+
+
+        apiService.users = [
+            {firstName: "Frank", lastName: "Kang", userEmail: "Frank.Kang@live.com", description: "Hi, my name is Frank Kang"},
+            {firstName: "Rebecca", lastName: "Song", userEmail: "Rebecca.Song@live.com", description: "Hi my name is Rebecca Song"},
+            {firstName: "Erin", lastName: "Gallagher", userEmail: "Erin.Gallagher@live.com", description: "Hi my name is Erin Gallagher"},
+            {firstName: "Anthony", lastName: "Lionti", userEmail: "Anthony.Lionti@live.com", description: "Hi my name is Anthony Lionti"}
+        ];
+
+        //Retreive user profile
+        apiService.getUserProfile = function(){
+            var q = $q.defer();
+            q.resolve(apiService.users);
+            return q.promise;
+        }
+
+        apiService.getUsersList = function(){
+            var q = $q.defer();
+            q.resolve(apiService.users);
+            return q.promise;
+        }
 
         return apiService;
     }

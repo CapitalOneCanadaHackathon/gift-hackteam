@@ -1,4 +1,66 @@
-<div>
-    <h1>Users Page</h1>
-    <p>{{vm.test}}</p>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<div ng-app='faver.users'>
+    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+   		<input type="text" class="form-control" placeholder="Search For User" ng-model="searchUser">
+ 	</div>  
+    <table id="userList" class="table table-striped table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>
+					<a href="#/users" ng-click="sortType = 'firstName'; sortReverse = !sortReverse">
+			            First Name 
+			            <span ng-show="sortType == 'firstName' &&!sortReverse" class="fa fa-caret-down"/>
+			            <span ng-show="sortType == 'firstName' && sortReverse" class="fa fa-caret-up"/>
+
+	 			 	</a>
+                </th>
+                <th>
+	            	<a href="#/users" ng-click="sortType = 'lastName'; sortReverse = !sortReverse">
+			            Last Name 
+			            <span ng-show="sortType == 'lastName' && !sortReverse" class="fa fa-caret-down"/>
+			            <span ng-show="sortType == 'lastName' && sortReverse" class="fa fa-caret-up"/>
+	 			 	</a>
+                </th>
+                <th>
+                	<a href="#/users" ng-click="sortType = 'userEmail'; sortReverse = !sortReverse">
+			            Email 
+			            <span ng-show="sortType == 'userEmail'&& !sortReverse" class="fa fa-caret-down"/>
+			            <span ng-show="sortType == 'userEmail' && sortReverse" class="fa fa-caret-up"/>
+	 			 	</a>
+                </th>
+                <th>
+            	    <input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" />
+                </th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>email</th>
+                <th>
+                </th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr ng-repeat="user in usersList | orderBy:sortType:sortReverse | filter:searchUser">
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td><a href="mailto:{{user.userEmail}} "> {{user.userEmail}}</a></td>
+                <td>
+                	<input type="checkbox" ng-model="selected" ng-change="change()" id="user.userEmail" >
+                </td>
+
+            </tr> 
+       
+        </tbody>
+    </table>
 </div>
+</html>
