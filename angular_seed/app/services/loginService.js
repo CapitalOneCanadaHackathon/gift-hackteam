@@ -18,7 +18,9 @@
                     }else{
                         var userInfo = {
                             userID:newData.userId,
-                            userInfo:newData.userType
+                            userInfo:newData.userType,
+                            firstName:newData.firstName,
+                            lastName:newData.lastName
                         };
                         q.resolve(userInfo);
                     }

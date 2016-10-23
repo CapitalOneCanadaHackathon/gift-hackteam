@@ -18,6 +18,8 @@
                     console.log("valid credentials, singing in");
                     $sessionStorage.userID = userInfo.userID;
                     $sessionStorage.userType = userInfo.userType;
+                    $sessionStorage.firstName = userInfo.firstName;
+                    $sessionStorage.lastName = userInfo.lastName;
                     $state.go("home");
                 },
                 function(err){
@@ -29,6 +31,8 @@
         //session is destroyed so they must log in again 
         delete $sessionStorage.userID;
         delete $sessionStorage.userType;
+        delete $sessionStorage.firstName;
+        delete $sessionStorage.lastName;
         
     }
 })();
