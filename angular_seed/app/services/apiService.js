@@ -2,13 +2,9 @@
     'use strict';
     angular.module('faver.core').service('ApiService', ApiService);
 
-    ApiService.$inject = ['$q','$http'];
+    ApiService.$inject = ['$q', '$http'];
 
-<<<<<<< HEAD
-    function ApiService($q, $http){
-=======
-    function ApiService($q) {
->>>>>>> 7909be8ba725c81a040e4fa6a566ec53315a0452
+    function ApiService($q, $http) {
 
         var apiService = {};
 
@@ -21,20 +17,37 @@
         var userID = "123ecg";
 
         apiService.monthlyEvents = [
-            { title: 'All Day Event', start: new Date(y, m, 1), eventID: 1, type: "volunteer-meeting", location: "123 address st.", description: "this is a great meeting", createdBy:"12", numVolunNeeded:5, numAttendees:3},
-            { title: 'Long Event', start: new Date(y, m, d - 5), end: new Date(y, m, d - 2), eventID: 2, type: "social", location: "123 address st.", description: "this is a great meeting", createdBy:"12", numVolunNeeded:2, numAttendees:5},
-            { title: 'Repeating Event', start: new Date(y, m, d - 3, 16, 0), allDay: false, eventID: 3, type: "lunch", location: "123 address st.", description: "this is a great meeting", createdBy:"12", numVolunNeeded:5, numAttendees:2},
-            { title: 'Repeating Event', start: new Date(y, m, d + 4, 16, 0), allDay: false, eventID: 4, type: "board-meeting", location: "123 address st.", description: "this is a great meeting", createdBy:"12", numVolunNeeded:8, numAttendees:6},
-            { title: 'Birthday Party', start: new Date(y, m + 1, d + 1, 19, 0), end: new Date(y, m, d + 1, 22, 30), allDay: false, eventID: 5, type: "family-meeting", location: "123 address st.", description: "this is a great meeting", createdBy:"12", numVolunNeeded:5, numAttendees:1},
-            { title: 'Click for Google', start: new Date(y, m, 28), end: new Date(y, m, 29), eventID: 6, type: "board-meeting", location: "123 address st.", description: "this is a great meeting", createdBy:"12", numVolunNeeded:7, numAttendees:2}
         ];
 
         //retrieve all events
-
         apiService.getMonthlyBookings = function () {
-            var q = $q.defer();
-            q.resolve(apiService.monthlyEvents);
-            return q.promise;
+            // var q = $q.defer();
+            // q.resolve(apiService.monthlyEvents);
+            // return q.promise;
+
+            //var promisePost = // Simple GET request example:
+            // $http({
+            //     method: 'POST',
+            //     url: '/api/postTest',
+            //     data: {"name": 1, "id": 2222}
+            // }).then(function successCallback(response) {
+            //     console.log("worked!");
+            // }, function errorCallback(response) {
+            //     console.log("error has occurred!");
+            // });
+		    
+            var promisePost = $http({
+                method: 'GET',
+                url: '/api/getEvents',
+            }).then(function successCallback(response) {
+                console.log(response);
+                apiService.monthlyEvents = response.data;
+            }, function errorCallback(response) {
+                console.log("error has occurred!");
+            });
+		    
+
+            return promisePost;
         }
 
         apiService.attendees = [
@@ -77,25 +90,9 @@
             //TODO: connect to server.js
             console.log("user visited page, updating db....");
         }
->>>>>>> 7909be8ba725c81a040e4fa6a566ec53315a0452
 
             
-            var promisePost = $http.post('/test', {})
-                .success(function(data, status) {
-                    console.log(data);
-                    apiService.monthlyEvents = data;
-                })
-                .error(function(data, status) {
-                    console.log("Error has occured!");
-                });
-
-		    return promisePost;
-
-<<<<<<< HEAD
-		}
         
-=======
-            */
 
         // ---- ADMIN ---- //
 
@@ -138,7 +135,6 @@
             return q.promise;
 
         };
->>>>>>> 7909be8ba725c81a040e4fa6a566ec53315a0452
 
         return apiService;
     }
