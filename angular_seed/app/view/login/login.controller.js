@@ -21,7 +21,7 @@
                     $state.go("home");
                 },
                 function(err){
-                    alert("error retrieving events");
+                    alert("Username or Password is invalid");
                 });
         }
 

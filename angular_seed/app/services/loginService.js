@@ -11,11 +11,21 @@
         loginService.validate = function(email,password) {
             var q = $q.defer();
             ApiService.validateLoginCredentials(email,password)
-                .then(function(userInfo){
-                    q.resolve(userInfo);
+                .then(function(data){
+                    var newData = data.data;
+                    if(data.data == ""){ //determine if validated
+                        q.reject();
+                    }else{
+                        var userInfo = {
+                            userID:newData.userId,
+                            userInfo:newData.userType
+                        };
+                        q.resolve(userInfo);
+                    }
+                    
                 },
                 function(err){
-                    alert("error could not attend event");
+                    //alert("error could not attend event");
                     q.reject();
                 });
             return q.promise;
