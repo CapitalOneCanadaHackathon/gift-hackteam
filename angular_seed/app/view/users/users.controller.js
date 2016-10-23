@@ -2,17 +2,20 @@
     'use strict';
     angular.module('faver.users').controller('UsersController', UsersController);
 
-    function UsersController(){
-        var vm = this;
-		vm.myVar = "http://www.gravatar.com/avatar/"
+    UsersController.$inject = ['$scope','UsersService'];
 
-        vm.firstName = 'Frank'; // First Name display
-        vm.lastName = 'Kang'; // Last Name display
-        vm.email = 'frank2258@hotmail.com'; // Email
-        vm.lastActive = 'activity'; // last Activity
-        vm.hashTag = '#tags'; // Tags 
-        vm.myStory = 'text'; 
+  
 
 
+
+    function UsersController($scope, UsersService){
+    	
+    	$scope.firstNameList = [];
+    	$scope.lastNameList = [];
+    	$scope.userEmailList = [];
+
+    	UsersService.getUsersList();//generate users array through API serivce 
+        $scope.usersList = UsersService.usersList; // ?
     }
+
 })();
