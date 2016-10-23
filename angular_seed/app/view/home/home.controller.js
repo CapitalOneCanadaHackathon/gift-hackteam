@@ -2,9 +2,9 @@
     'use strict';
     angular.module('faver.home').controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope','$state','uiCalendarConfig','EventService'];
+    HomeController.$inject = ['$scope','$state','uiCalendarConfig','EventService','LoginService'];
 
-    function HomeController($scope,$state,uiCalendarConfig,EventService){
+    function HomeController($scope,$state,uiCalendarConfig,EventService,LoginService){
         var vm = this;
         var date = new Date();
         var d = date.getDate();
@@ -50,6 +50,10 @@
 
         //on page load retirve events for given month   
         EventService.getMonthlyEvents();
+
+        //confirm the user has logged in on page load
+         //TODO: should do this and confirm before making database calls
+        LoginService.confirmSession();
 
     }
 })();
