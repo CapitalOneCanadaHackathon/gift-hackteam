@@ -10,6 +10,8 @@
 
         eventService.monthlyEvents = [];
         eventService.eventAttendees = [];
+        eventService.eventInfo = {};
+        /*
         eventService.eventInfo = {
             eventName:"Volunteer Meeting",
             firstName:"Erin",
@@ -20,6 +22,7 @@
             location:"123 adress st.",
             volunteersRequired:0
          };
+         */
          eventService.numberOfVolunteers = 0;
          eventService.eventInfo.currentUserAttending = 0; //0 = false, 1 = true
          eventService.userID = $sessionStorage.userID; //TODO retirve from session or user service
@@ -29,18 +32,18 @@
         eventService.getMonthlyEvents = function() {
             ApiService.getMonthlyBookings()
                 .then(function(data){
-                   // must remove old bookings before trying to add new ones
-                     var numEvents = eventService.monthlyEvents.length;
-                     
-                     var newData = data.data;
-                     eventService.monthlyEvents.splice(0,numEvents);
+                // must remove old bookings before trying to add new ones
+                    var numEvents = eventService.monthlyEvents.length;
+                    
+                    var newData = data.data;
+                    eventService.monthlyEvents.splice(0,numEvents);
 
-				     for(var i = 0; i<newData.length; i++){//add events to array one by one
+                    for(var i = 0; i<newData.length; i++){//add events to array one by one
                         var colour = eventService.pickEventColour(newData[i].numAttendees, newData[i].numVolunNeeded);
                         newData[i].color = colour;
                         eventService.monthlyEvents.push(newData[i]);
-                     }
-                     
+                    }
+                    
                 },
                 function(err){
                     alert("error retrieving events");
@@ -58,25 +61,27 @@
 
         //returns the list of attendees for an event
         eventService.getAttendees = function() {
-            ApiService.getAttendees(eventService.eventInfo.eventID)
-                .then(function(data){
-                   console.log(data);
-                   var newData = data.data;
-                   var numEvents = eventService.eventAttendees.length;
-                   eventService.eventAttendees.splice(0,numEvents);
-                    eventService.eventInfo.volunteersRequired = 0;
-                     eventService.numberOfVolunteers = 0;
-				    for(var i = 0; i<newData.length; i++){//add events to array one by one
-                       eventService.eventAttendees.push(newData[i]);
-                       eventService.numberOfVolunteers ++;
-                    }
-                    eventService.eventInfo.volunteersRequired = eventService.eventInfo.numVolunNeeded - eventService.numberOfVolunteers;
-                    eventService.currentUserAttending = eventService.isUserAttending();//determine if current user is attending the event
-                    console.log(eventService.eventInfo.volunteersRequired);
-            },
-                function(err){
-                    alert("error retrieving attendees");
-                });
+            if (eventService.eventInfo.hasOwnProperty('eventID')) { //confirm eventInfo is not null
+                ApiService.getAttendees(eventService.eventInfo.eventID)
+                    .then(function(data){
+                    console.log(data);
+                    var newData = data.data;
+                    var numEvents = eventService.eventAttendees.length;
+                    eventService.eventAttendees.splice(0,numEvents);
+                        eventService.eventInfo.volunteersRequired = 0;
+                        eventService.numberOfVolunteers = 0;
+                        for(var i = 0; i<newData.length; i++){//add events to array one by one
+                        eventService.eventAttendees.push(newData[i]);
+                        eventService.numberOfVolunteers ++;
+                        }
+                        eventService.eventInfo.volunteersRequired = eventService.eventInfo.numVolunNeeded - eventService.numberOfVolunteers;
+                        eventService.currentUserAttending = eventService.isUserAttending();//determine if current user is attending the event
+                        console.log(eventService.eventInfo.currentUserAttending);
+                    },
+                    function(err){
+                        alert("error retrieving attendees");
+                    });
+            }
         }
 
         //determine if the current user is attending the event
@@ -97,7 +102,7 @@
         //adds the current user to the attendee list for an event
         eventService.attendEvent = function() {
             var q = $q.defer();
-            ApiService.attendEvent(eventService.eventInfo.eventID)
+            ApiService.attendEvent(eventService.eventInfo.eventID,eventService.userID)
                 .then(function(){
                     q.resolve();
                 },
@@ -111,7 +116,7 @@
         //leaves the current event and remove user from attendee list
         eventService.leaveEvent = function() {
             var q = $q.defer();
-            ApiService.leaveEvent(eventService.eventInfo.eventID)
+            ApiService.leaveEvent(eventService.eventInfo.eventID,eventService.userID)
                 .then(function(){
                     q.resolve();
                 },
@@ -127,7 +132,9 @@
         //updates the total number of people who visited the event
         //and who visited the event in logs
         eventService.visitedEvent = function() {
-            ApiService.visitedEvent(eventService.eventInfo.eventID);
+            if (eventService.eventInfo.hasOwnProperty('eventID')) { //confirm eventInfo is not null
+                ApiService.visitedEvent(eventService.eventInfo.eventID);
+            }
         }
 
 

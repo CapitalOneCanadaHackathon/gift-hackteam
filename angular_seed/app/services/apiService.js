@@ -8,7 +8,7 @@
 
         var apiService = {};
         var userInfo = {//TODO remove once real data is returned 
-            userID:"123ecg",
+            userID:"1",
             userType:"admin" //Admin or Volunteer
         };
         // ---- LOGIN ---- //
@@ -94,13 +94,10 @@
 
         //adds the current user to the attendee list for an event
         //parameters: eventID, userID
-        apiService.attendEvent = function (eventID) {
-            // var q = $q.defer();
-            // q.resolve();
-            // return q.promise;
-            //TODO: connect to server.js
-            
-            var promisePost = $http.post('api/attendEvent', { "eventId" :eventID, "userId": 1})
+        apiService.attendEvent = function (eventID,userID) {
+
+            console.log(userID);
+            var promisePost = $http.post('api/attendEvent', { "eventId" :eventID, "userId": userID})
 		    .success(function(data, status) {
                 console.log(data);
 		    })
@@ -113,12 +110,10 @@
 
          //leaves the current event and remove user from attendee list
          //parameters: eventID, userID
-        apiService.leaveEvent = function (eventID) {
-            // var q = $q.defer();
-            // q.resolve();
-            // return q.promise;
-            //TODO: connect to server.js
-            var promisePost = $http.post('api/leaveEvent', { "eventId" :eventID, "userId": 1})
+        apiService.leaveEvent = function (eventID,userID) {
+           
+            console.log(eventID);
+            var promisePost = $http.post('api/leaveEvent', { "eventId" :eventID, "userId": userID})
 		    .success(function(data, status) {
                 console.log(data);
 		    })
