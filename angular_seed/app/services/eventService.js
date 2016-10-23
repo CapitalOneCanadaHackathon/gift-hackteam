@@ -22,7 +22,7 @@
          };
          eventService.numberOfVolunteers = 0;
          eventService.eventInfo.currentUserAttending = 0; //0 = false, 1 = true
-         eventService.userID = "3ecweg"; //TODO retirve from session or user service
+         eventService.userID = $sessionStorage.userID; //TODO retirve from session or user service
 
         
         //retrieve all events
