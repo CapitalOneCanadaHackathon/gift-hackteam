@@ -10,8 +10,8 @@ exports.connect = function(done) {
   state.pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: '123456',
-    database: 'testvas'
+    password: '1234',
+    database: 'faverdb'
   });
   done();
 }
@@ -45,15 +45,4 @@ exports.drop = function(tables, done) {
   async.each(tables, function(name, cb) {
     pool.query('DELETE * FROM ' + name, cb)
   }, done)
-}
-
-exports.getUserById = function(){
-  var pool = state.pool;
-  if (!pool) return done(new Error('Missing database connection.'));
-
-  pool.query('SELECT * FROM testvas', function(err, results){
-    console.log(results[0].NAME);
-    return results[0].NAME;
-    
-  });
 }

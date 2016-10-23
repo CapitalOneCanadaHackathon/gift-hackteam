@@ -29,16 +29,18 @@
         eventService.getMonthlyEvents = function() {
             ApiService.getMonthlyBookings()
                 .then(function(data){
-                    //must remove old bookings before trying to add new ones
-                    var numEvents = eventService.monthlyEvents.length;
-		            eventService.monthlyEvents.splice(0,numEvents);
-				    for(var i = 0; i<data.length; i++){//add events to array one by one
-                        var colour = eventService.pickEventColour(data[i].numAttendees, data[i].numVolunNeeded);
-                        data[i].color = colour;
-                        eventService.monthlyEvents.push(data[i]);
-                    }
-                    console.log(eventService.monthlyEvents);
-                    console.log($sessionStorage.userID);
+                   // must remove old bookings before trying to add new ones
+                     var numEvents = eventService.monthlyEvents.length;
+                     
+                     var newData = data.data;
+                     eventService.monthlyEvents.splice(0,numEvents);
+
+				     for(var i = 0; i<newData.length; i++){//add events to array one by one
+                        var colour = eventService.pickEventColour(newData[i].numAttendees, newData[i].numVolunNeeded);
+                        newData[i].color = colour;
+                        eventService.monthlyEvents.push(newData[i]);
+                     }
+                     
                 },
                 function(err){
                     alert("error retrieving events");
@@ -58,12 +60,14 @@
         eventService.getAttendees = function() {
             ApiService.getAttendees(eventService.eventInfo.eventID)
                 .then(function(data){
-                    var numEvents = eventService.eventAttendees.length;
+                   console.log(data);
+                   var newData = data.data;
+                   var numEvents = eventService.eventAttendees.length;
                    eventService.eventAttendees.splice(0,numEvents);
                     eventService.eventInfo.volunteersRequired = 0;
                      eventService.numberOfVolunteers = 0;
-				    for(var i = 0; i<data.length; i++){//add events to array one by one
-                       eventService.eventAttendees.push(data[i]);
+				    for(var i = 0; i<newData.length; i++){//add events to array one by one
+                       eventService.eventAttendees.push(newData[i]);
                        eventService.numberOfVolunteers ++;
                     }
                     eventService.eventInfo.volunteersRequired = eventService.eventInfo.numVolunNeeded - eventService.numberOfVolunteers;
