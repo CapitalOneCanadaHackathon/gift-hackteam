@@ -156,10 +156,13 @@ app.post('/api/getAdminInfo', function(req, res){
         var pool = db.get();
         var events = [];
         pool.query('SELECT * FROM adminkey', function(err, results){         
-            var pool2 = db.get();
-            events.push({"key":results[0].genDate, "date":results[0].accountCreationKey});
+            console.log(Date(results[0].genDate));
+            console.log(results[0].accountCreationKey);
+            events.push({"key":results[0].accountCreationKey, "date":results[0].genDate});
+            console.log(events);
+            res.status(200).json(events); 
         });
-        res.status(200).json(events); 
+        
     }
 });
 
@@ -182,13 +185,90 @@ app.post('/api/updateKey', function(req, res){
     }
 });
 
-// ----login posts ----//
+app.post('/api/getUsers', function(req, res){
+
+    db.connect(done);
+
+    function done(){
+        var pool = db.get();
+        var users = [];
+        
+        pool.query('SELECT * FROM useraccount', function(err, results){
+            
+            var arraylength = results.length;
+            var isAdmin;
+            for(var i = 0; i < arraylength; i++){
+                if(results[i].userType == 'admin'){
+                    isAdmin = true;
+                }
+                else{
+                    isAdmin = false;
+                }
+                users.push({"userId":results[i].userId, "firstname":results[i].firstName, "lastname":results[i].lastName, "email":results[i].userEmail, "isAdmin": isAdmin});
+            }
+            console.log(users);
+            res.status(200).json(users); 
+        });
+    }
+});
+
+app.post('/api/updateUsers', function(req, res){
+
+    db.connect(done);
+
+    function done(){
+        var pool = db.get();
+        var users = [];
+        
+        pool.query('UPDATE useraccount SET ', function(err, results){
+            
+            var arraylength = results.length;
+            var isAdmin;
+            for(var i = 0; i < arraylength; i++){
+                if(results[i].userType == 'admin'){
+                    isAdmin = true;
+                }
+                else{
+                    isAdmin = false;
+                }
+                users.push({"userId":results[i].userId, "firstname":results[i].firstName, "lastname":results[i].lastName, "email":results[i].userEmail, "isAdmin": isAdmin});
+            }
+            console.log(users);
+            res.status(200).json(users); 
+        });
+    }
+});
+
+app.post('/api/saveUsers', function(req, res){
+
+    var users = req.body.users;
+    var diff = req.body.diff;
+    
+    //console.log(req.body);
+    db.connect(done);
+
+    function done(){
+        var pool = db.get();
+        var events = [];
+        pool.query('SELECT * FROM adminkey', function(err, results){         
+            console.log(Date(results[0].genDate));
+            console.log(results[0].accountCreationKey);
+            events.push({"key":results[0].accountCreationKey, "date":results[0].genDate});
+            console.log(events);
+            res.status(200).json(events); 
+        });
+        
+    }
+});
+
+// ----login POST ----//
 
 app.post('/api/validateLoginCredentials', function(req, res){
 
     var useremail = req.body.useremail;
     var userpassword = req.body.userpassword;
-    //console.log(req.body);
+    console.log(useremail);
+    console.log(userpassword);
     db.connect(done);
 
     function done(){
@@ -196,7 +276,7 @@ app.post('/api/validateLoginCredentials', function(req, res){
         var events = [];
         var presentDate = new Date();
         pool.query('SELECT * FROM useraccount WHERE useremail = ? AND userpassword = ?',[useremail,userpassword], function(err, results){         
-            res.status(200).json({"userID" : results[0].userid, "usertype" : results[0].usertype});
+            res.status(200).json(results[0]);
         });
     }
 });

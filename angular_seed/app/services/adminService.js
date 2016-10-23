@@ -2,9 +2,9 @@
     'use strict';
     angular.module('faver.core').service('AdminService', AdminService);
 
-    AdminService.$inject = ['$q', 'ApiService'];
+    AdminService.$inject = ['$q', 'ApiService', '$http'];
 
-    function AdminService($q, ApiService){
+    function AdminService($q, ApiService, $http){
 
         var adminService = {};
 
@@ -15,9 +15,9 @@
             var q = $q.defer();
             ApiService.getKeyCode()
                 .then(function(data) {
-                    console.log(data);
-                    adminService.keyCode.key = data.key;
-                    adminService.keyCode.date = data.date;
+                    console.log(data.data[0]);
+                    adminService.keyCode.key = data.data[0].key;
+                    adminService.keyCode.date = data.data[0].date;
                     adminService.generateKey();
                     q.resolve();
                 }, function(err) {
@@ -32,18 +32,36 @@
 
         // get list of users
         adminService.getCurrentUsers = function() {
+
+        //     var promisePost = $http.post('api/getUsers')
+		//     .success(function(data, status) {
+        //         console.log(data);
+		//     })
+		//     .error(function(data, status) {
+        //         console.log(status);
+		//     	return 'error';
+		//     });
+            
+    	// 	return promisePost;
+        // };
+
             var q = $q.defer();
             ApiService.getUsers()
                 .then(function(data) {
-                    for (var i = 0; i < data.length; i++) {
-                        adminService.users.push(data[i]);
+                    console.log(data.data);
+                    var numEvents = adminService.users.length;
+                    var newData = data.data;
+                    adminService.users.splice(0, numEvents);
+                    for (var i = 0; i < data.data.length; i++) {
+                        adminService.users.push(data.data[i]);
                         // adminService.editUsersList.push(data[i]);
                     }
                     q.resolve();
                     angular.copy(adminService.users, adminService.editUsersList);
+                    
                 }, function(err) {
                     alert("Error retrieving users");
-                    q.defer();
+                    q.reject();
                 });
            return q.promise;     
         }
@@ -76,7 +94,8 @@
 
         // save users if changes have been made
         adminService.saveUsers = function(users) {
-
+            console.log("USERS");
+            console.log(users);
             adminService.editUsersList = [];
             for (var i = 0; i < users.length; i++) {
                 adminService.editUsersList.push(users[i]);
@@ -85,8 +104,34 @@
             if (!adminService.equals(adminService.users, adminService.editUsersList)) {
                 // send to db
                 console.log("Saved Edited Users");
+                console.log(adminService.users);
+                console.log(adminService.editUsersList);
+                var diff = [];
+                var updateAdmin = [];
+                for(var i = 0; i < adminService.editUsersList.length; i++){
+                    updateAdmin.push({"userId":adminService.editUsersList[i].userId, "isAdmin": adminService.editUsersList[i].isAdmin})
+                }
+                
+
+                var inlist = false;
+                for(var i = 0; i < adminService.users.length; i++){
+                    for(var j = 0; j < adminService.editUsersList.length; j++){
+                        if(adminService.users[i].userId == adminService.editUsersList[j].userId){
+                            inlist = true;
+                        }
+                    }
+                    if(inlist == false){
+                        diff.push(adminService.users[i]);
+                    }
+                    inlist = false;
+                }
+
+                console.log("DIFFFFFF");
+                console.log(diff);
+
                 angular.copy(adminService.editUsersList, adminService.users);
-                ApiService.saveUsers(adminService.users).then(function() {
+                
+                ApiService.saveUsers(updateAdmin, diff).then(function() {
                     console.log(adminService.users);    
                 }, function(err) {
                     alert("Error saving users");

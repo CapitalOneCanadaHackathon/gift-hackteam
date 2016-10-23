@@ -1,9 +1,10 @@
  <head>
   <style>
   body {
-    background-image: url("https://www.aclu.org/sites/default/files/styles/hero_big_wide_1200x528/public/field_banner_image/web15-siteimages-lgbt-2400x960.jpg?itok=uqPMteI6");
+    background-image: url("http://also.kottke.org/misc/images/moma-rainbow-flag.jpg");
+    background-size: 100%;
   }
-.container {
+.profileContainer {
   width: 400px;
   margin: 120px auto 120px;
   background-color: #F0E68C;
@@ -16,14 +17,14 @@
   -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.075);
   text-align: center;
 }
-.container:hover .avatar-flip {
+.profileContainer:hover .avatar-flip {
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
 }
-.container:hover .avatar-flip img:first-child {
+.profileContainer:hover .avatar-flip img:first-child {
   opacity: 0;
 }
-.container:hover .avatar-flip img:last-child {
+.profileContainer:hover .avatar-flip img:last-child {
   opacity: 1;
 }
 .avatar-flip {
@@ -81,14 +82,15 @@ p {
 </style>
 </head>
 <body>
-  <div class="container">
-    <div class="avatar-flip">
-      <img src="http://learngroup.org/assets/images/logos/default_male.jpg" height="150" width="150">
-      <img src="http://www.gpwa.org/forum/images/imported/2014/01/funnygifswhennoonesaroundlarge-1.gif" height="150" width="150">
+  <div class="profileContainer">
+    <div class="profile avatar-flip">
+      <img src="https://ptcblogs.files.wordpress.com/2015/05/hackathon-programming.png" height="150" width="150">
+      <img src="http://tclhost.com/clya4nh.gif" height="150" width="150">
     </div>
     <h2>{{vm.profile.userProfile.firstName}}  {{vm.profile.userProfile.lastName}}</h2>
-    <p>{{vm.profile.userProfile.userEmail}}</p>
+    <p><b>Email : </b>{{vm.profile.userProfile.userEmail}}</p>
+    <p><b>myStory : </b></p>
     <p>{{vm.profile.userProfile.myStory}}</p>
-    <p>{{vm.profile.userProfile.tag}}</p>
+    <p><b>Tags : </b>{{vm.profile.userProfile.tag}}</p>
   </div>
 </body>

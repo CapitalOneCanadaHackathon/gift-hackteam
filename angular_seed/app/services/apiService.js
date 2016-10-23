@@ -163,7 +163,7 @@
         apiService.updateKey = function(key){
             var promisePost = $http.post('api/updateKey', { "key" :key})
 		    .success(function(data, status) {
-                console.log(data);
+                //console.log(data);
 		    })
 		    .error(function(data, status) {
 		    	return 'error';
@@ -178,9 +178,9 @@
             // var q = $q.defer();
             // q.resolve(apiService.keyCode);
             // return q.promise;
-            var promisePost = $http.post('api/adminInfo')
+            var promisePost = $http.post('api/getAdminInfo')
 		    .success(function(data, status) {
-                console.log(data);
+                console.log(data[0]);
 		    })
 		    .error(function(data, status) {
 		    	return 'error';
@@ -191,29 +191,45 @@
         };
 
         // for retrieving the users
-        apiService.users = [
-            { "firstname": "Person", "lastname": "One", "email": "personone@email.com", "isAdmin": false },
-            { "firstname": "Person", "lastname": "Two", "email": "persontwo@email.com", "isAdmin": true },
-            { "firstname": "Person", "lastname": "Three", "email": "personthree@email.com", "isAdmin": false },
-            { "firstname": "Person", "lastname": "Four", "email": "personfour@email.com", "isAdmin": true },
-            { "firstname": "Person", "lastname": "Five", "email": "personfive@email.com", "isAdmin": false },
-            { "firstname": "Person", "lastname": "Six","email": "personsix@email.com", "isAdmin": true }
-        ];
+        // apiService.users = [
+        //     { "firstname": "Person", "lastname": "One", "email": "personone@email.com", "isAdmin": false },
+        //     { "firstname": "Person", "lastname": "Two", "email": "persontwo@email.com", "isAdmin": true },
+        //     { "firstname": "Person", "lastname": "Three", "email": "personthree@email.com", "isAdmin": false },
+        //     { "firstname": "Person", "lastname": "Four", "email": "personfour@email.com", "isAdmin": true },
+        //     { "firstname": "Person", "lastname": "Five", "email": "personfive@email.com", "isAdmin": false },
+        //     { "firstname": "Person", "lastname": "Six","email": "personsix@email.com", "isAdmin": true }
+        // ];
 
         apiService.getUsers = function() {
-            var q = $q.defer();
-            q.resolve(apiService.users);
-            return q.promise;
+             var promisePost = $http.post('api/getUsers')
+		    .success(function(data, status) {
+                console.log(data);
+		    })
+		    .error(function(data, status) {
+                console.log(status);
+		    	return 'error';
+		    });
+            
+    		return promisePost;
         };
 
         // for saving users
-        apiService.saveUsers = function(users) {
+        apiService.saveUsers = function(users, diff) {
 
-            // db insert
-            var q = $q.defer();
-            q.resolve();
-            return q.promise;
+
+             var promisePost = $http.post('api/saveUsers', {"users": users, "diff":diff})
+		    .success(function(data, status) {
+                console.log(data);
+		    })
+		    .error(function(data, status) {
+                console.log(status);
+		    	return 'error';
+		    });
+            
+    		return promisePost;
+
 		}
+
 
         // ---- USERS ---- //
 
@@ -221,7 +237,7 @@
             firstName:"Frank",
             lastName:"Kang",
             userEmail:"Frank.Kang@live.com",
-            myStory:"Hi, my name is Frank Kang",
+            myStory:"I worked as a programmer for 3 years, which made for a easy transition into technical writing at the end of 2011. I found that having a background in Computer Science with a penchant for  english language gave me the wherewithal to succeed in this field. When I got into technical writing, I found that I enjoyed translating complex, jargon-driven technical information into everyday language that anyone could easily understand. Because I came from a programming background, I was able to translate ideas while keeping their scientific integrity.",
             tag:"#hackathon"
         };
 
@@ -233,7 +249,7 @@
         }
 
         apiService.users = [
-            {firstName: "Frank", lastName: "Kang", userEmail: "Frank.Kang@live.com", description: "Hi, my name is Frank Kang"},
+            {firstName: "Frank", lastName: "Kang", userEmail: "Frank.Kang@live.com", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut metus sed mi imperdiet facilisis id faucibus tortor. Nullam accumsan lorem a aliquet aliquam. Ut porta sem sed orci porttitor, in ornare eros tempor. Vestibulum sollicitudin orci at risus rutrum congue. Suspendisse venenatis facilisis purus, id dignissim ex vulputate vel. Quisque euismod fringilla volutpat. Vivamus et quam sed dui suscipit egestas. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque felis dui, pretium a libero id, efficitur auctor ipsum. Vivamus purus tellus, pretium sit amet facilisis eget, tincidunt vel magna. Suspendisse quis sollicitudin risus, ut finibus enim. Curabitur sem ante, vulputate at sollicitudin in, ornare quis velit. Fusce in dui eu urna feugiat lacinia vel ac enim. Aliquam ut tristique dolor. Curabitur imperdiet diam vel odio tincidunt, non molestie tellus ornare. Donec id diam fringilla, tempus dolor eu, ullamcorper metus. Morbi pellentesque ac ligula luctus tincidunt. Aenean maximus urna sed magna posuere, dapibus ullamcorper ex pellentesque."},
             {firstName: "Rebecca", lastName: "Song", userEmail: "Rebecca.Song@live.com", description: "Hi my name is Rebecca Song"},
             {firstName: "Erin", lastName: "Gallagher", userEmail: "Erin.Gallagher@live.com", description: "Hi my name is Erin Gallagher"},
             {firstName: "Anthony", lastName: "Lionti", userEmail: "Anthony.Lionti@live.com", description: "Hi my name is Anthony Lionti"}
