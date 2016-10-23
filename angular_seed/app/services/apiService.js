@@ -16,9 +16,21 @@
         //validate login credentials
         //return userID
         apiService.validateLoginCredentials = function (email,password) {
+            /*
             var q = $q.defer();
             q.resolve(userInfo);
             return q.promise;
+            */
+            console.log(email);
+            var promisePost = $http.post('api/validateLoginCredentials', {"useremail" :email, "userpassword" :password})
+                  .success(function(data, status) {
+                      console.log(data);
+                  })
+                  .error(function(data, status) {
+                     console.log("Error has occured!");
+                  });
+  
+  		    return promisePost;
         }
 
         // ---- EVENTS ---- //
@@ -80,7 +92,7 @@
         //returns the list of attendees for an event
         apiService.getAttendees = function (eventID) {
             //hardcoded userid
-            var promisePost = $http.post('api/getAttendees', { "eventId" :eventID})
+            var promisePost = $http.post('api/getAttendees', {"eventId" :eventID})
 		    .success(function(data, status) {
                 console.log(data);
 		    })

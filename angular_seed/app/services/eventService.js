@@ -93,8 +93,8 @@
                     q.resolve();
                 },
                 function (err) {
-                    alert("error could not attend event");
-                    q.reject();
+                    alert("user name or password are incorrect");
+                    q.reject("user name or password are incorrect");
                 });
             return q.promise;
         }
