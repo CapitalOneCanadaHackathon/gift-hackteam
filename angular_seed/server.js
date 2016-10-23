@@ -19,7 +19,6 @@ app.post('/api/postTest', function(req,res){
 });
 
 app.get('/basictest', function(req, res) {
-    console.log("hell");
     db.connect(done);
 
     function done(){
@@ -186,7 +185,6 @@ app.post('/api/updateKey', function(req, res){
     }
 });
 
-
 app.post('/api/getUsers', function(req, res){
 
     db.connect(done);
@@ -263,6 +261,7 @@ app.post('/api/saveUsers', function(req, res){
     }
 });
 
+
 app.post('/api/getUserProfile', function(req, res){
 
     
@@ -309,6 +308,26 @@ app.post('/api/getProfiles', function(req, res){
 
 //INSERTS INTO ALL TABLES
 
+// ----login POST ----//
+
+app.post('/api/validateLoginCredentials', function(req, res){
+
+    var useremail = req.body.useremail;
+    var userpassword = req.body.userpassword;
+    console.log(useremail);
+    console.log(userpassword);
+    db.connect(done);
+
+
+    function done(){
+        var pool = db.get();
+        var events = [];
+        var presentDate = new Date();
+        pool.query('SELECT * FROM useraccount WHERE useremail = ? AND userpassword = ?',[useremail,userpassword], function(err, results){         
+            res.status(200).json(results[0]);
+        });
+    }
+});
 
 
 app.listen(8080);

@@ -2,15 +2,17 @@
     'use strict';
     angular.module('faver.home').controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope','$state','uiCalendarConfig','EventService','LoginService'];
+    HomeController.$inject = ['$scope','$state','uiCalendarConfig','EventService','LoginService','$sessionStorage'];
 
-    function HomeController($scope,$state,uiCalendarConfig,EventService,LoginService){
+    function HomeController($scope,$state,uiCalendarConfig,EventService,LoginService,$sessionStorage){
         var vm = this;
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
         $scope.events = EventService.monthlyEvents;
+        $scope.firstName = $sessionStorage.firstName;
+        $scope.lastName = $sessionStorage.lastName;
 
         $scope.eventSources = [$scope.events];
 
