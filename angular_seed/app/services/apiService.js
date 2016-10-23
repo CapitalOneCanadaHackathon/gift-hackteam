@@ -7,15 +7,17 @@
     function ApiService($q) {
 
         var apiService = {};
-        var userID = "123ecg"; //TODO remove once real data is returned
-
+        var userInfo = {//TODO remove once real data is returned 
+            userID:"123ecg",
+            userType:"admin" //Admin or Volunteer
+        };
         // ---- LOGIN ---- //
 
         //validate login credentials
         //return userID
         apiService.validateLoginCredentials = function (email,password) {
             var q = $q.defer();
-            q.resolve(userID);
+            q.resolve(userInfo);
             return q.promise;
         }
 
