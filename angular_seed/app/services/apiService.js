@@ -133,7 +133,6 @@
         //and who visited the event in logs
         //parameters: eventID, userID
         apiService.visitedEvent = function (eventID) {
-            //TODO: connect to server.js
             var promisePost = $http.post('api/visitedEventPage', { "eventId" :eventID})
 		    .success(function(data, status) {
                 console.log(data);
